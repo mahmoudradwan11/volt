@@ -4,6 +4,7 @@ import 'package:volt/core/screens/login_screen.dart';
 import 'package:volt/core/screens/register_screen.dart';
 import 'package:volt/core/screens/splash.dart';
 import 'package:volt/main.dart';
+import 'package:volt/users/Screens/forget_password.dart';
 import 'package:volt/users/Screens/onBoarding.dart';
 
 class RouteGenerator {
@@ -21,6 +22,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case AppRoutes.register:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
+      case AppRoutes.forgetPassword:
+        return MaterialPageRoute(builder: (_) => ForgetPasswordScreen());
       default:
         return unDefinedRoute();
     }

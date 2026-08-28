@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:volt/core/barrel_core.dart';
 import 'package:volt/core/network/barrel_network.dart';
+import 'package:volt/core/screens/login_screen.dart';
 
 class OnboardingCubit extends Cubit<OnBoardingStates> {
   OnboardingCubit() : super(OnBoardingInitState());
@@ -27,7 +28,8 @@ class OnboardingCubit extends Cubit<OnBoardingStates> {
   void submit(context) {
     CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
       if (value) {
-        Navigator.pushNamed(context, AppRoutes.login);
+        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => LoginScreen()),
+              (Route<dynamic> route) => false,);
       }
     });
   }

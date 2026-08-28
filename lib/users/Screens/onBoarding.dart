@@ -13,6 +13,7 @@ class OnboardingScreen extends StatelessWidget {
         var pageController = PageController();
         var cubit = OnboardingCubit.get(context);
         return Scaffold(
+          backgroundColor: AppColors.scaffoldBackGroundColor,
           body: Column(
             children: [
               Padding(

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:volt/core/barrel_core.dart';
 import 'package:volt/core/controllers/login_cubit/login_cubit.dart';
 import 'package:volt/core/controllers/login_cubit/login_states.dart';
 import 'package:volt/core/mangers/reg/reg_exp.dart';
 import 'package:volt/core/mangers/toast.dart';
 import 'package:volt/core/network/local/cache_helper.dart';
+import 'package:volt/main.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -33,8 +35,8 @@ class LoginScreen extends StatelessWidget {
              // navigateAndFinishThisScreen(context, const AdminHomeScreen());
             } else {
              // ElktraCubit.get(context).currentHomeScreenIndex=0;
-              Navigator.pushNamed(context,AppRoutes.home);
-            }
+              Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => MyHomePage(title: 'Go With Flows',)),
+                    (Route<dynamic> route) => false,);          }
           });
         } else {
           print(state.model.message);
@@ -97,7 +99,13 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 20,),
                     DefaultFieldForm(controller: emailController,
                       keyboard: TextInputType.emailAddress,
-                      valid: (value) {},
+                      valid: (value) {
+
+                          if (value.isEmpty) {
+                            return 'Please Enter Your Email';
+                          }
+                          return null;
+                      },
                       label: 'Email',
                       hint: 'Enter Your Email',
                       hintStyle: TextStyle(
@@ -110,7 +118,12 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: AppValuesForWAndH.height2,),
                     DefaultFieldForm(controller: passwordController,
                       keyboard: TextInputType.visiblePassword,
-                      valid: (value) {},
+                      valid: (value)  {
+                        if (value.isEmpty) {
+                          return 'Please Enter Your Password';
+                        }
+                        return null;
+                      },
                       label: 'Password',
                       hint: 'Enter Your Password',
                       hintStyle: TextStyle(
@@ -119,17 +132,27 @@ class LoginScreen extends StatelessWidget {
                         color: AppColors.scaffoldBackGroundColor,
                         fontWeight: FontWeight.w100,),
                       prefix: IconBroken.Lock,
-                      suffix: IconBroken.Hide,
+                show: cubit.passwordShow,
+                suffix: cubit.suffixIcon,
+                suffixPress: () {
+                  cubit.changePasswordIcon();
+                }
                     ),
                     Align(
                         alignment: AlignmentDirectional.topEnd,
                         child: MaterialButton(onPressed: () {
-                          //  navigateToNextScreen(context, ForgetPasswordScreen());
+                          Navigator.pushNamed(context,AppRoutes.forgetPassword);
                         }, child: Text('Forget Password ?', style: TextStyle(
                             color: Colors.indigo),),)),
                     const SizedBox(
                       height: 20,
                     ),
+                    state is LoadingLogin ? Center(
+                      child: LoadingAnimationWidget.inkDrop(
+                        color:Colors.white,
+                        size: 20,
+                      ),
+                    ):
                     DefaultButton(
                         backgroundColor: Colors.indigo.withOpacity(0.5),
                         borderColor: Colors.transparent,

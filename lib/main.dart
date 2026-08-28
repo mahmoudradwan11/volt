@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:volt/core/controllers/forget_password_cubit/forget_password_cubit.dart';
 import 'package:volt/core/themes/light/light.dart';
 import 'core/barrel_core.dart';
 import 'core/controllers/login_cubit/login_cubit.dart';
@@ -37,6 +38,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OnboardingCubit(), lazy: true),
         BlocProvider(
           create: (context) => LoginCubit(),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => ForgetPasswordCubit(),
           lazy: true,
         ),
       ],
