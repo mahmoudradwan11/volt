@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:volt/core/controllers/forget_password_cubit/forget_password_cubit.dart';
-import 'package:volt/core/controllers/register_cubit/register_cubit.dart';
 import 'package:volt/core/themes/light/light.dart';
-import 'core/barrel_core.dart';
-import 'core/controllers/login_cubit/login_cubit.dart';
+import 'core/barrel/barrel_core.dart';
 import 'core/controllers/observer.dart';
-import 'core/network/barrel_network.dart';
+import 'core/barrel/barrel_network.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,10 +39,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => OnboardingCubit(), lazy: true),
-        BlocProvider(create: (context) => LoginCubit(), lazy: true),
-        BlocProvider(create: (context) => ForgetPasswordCubit(), lazy: true),
-        BlocProvider(create: (context) => RegisterCubit(), lazy: true),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

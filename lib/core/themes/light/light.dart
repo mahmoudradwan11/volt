@@ -37,5 +37,5 @@ ThemeData lightTheme = ThemeData(
       height: 1.3,
     ),
   ),
-  scaffoldBackgroundColor: AppColors.defaultColor,
+  scaffoldBackgroundColor: AppColors.whiteColor,
 );

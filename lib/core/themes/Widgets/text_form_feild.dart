@@ -37,7 +37,7 @@ class DefaultFieldForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style:TextStyle(color: AppColors.scaffoldBackGroundColor),
+      style:TextStyle(color: AppColors.whiteColor),
       onTapOutside: (event)=>FocusScope.of(context).unfocus(),
       validator: valid,
       controller: controller,
@@ -51,7 +51,7 @@ class DefaultFieldForm extends StatelessWidget {
         contentPadding: const EdgeInsets.all(16),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.indigo.withOpacity(0.6)),
+          borderSide: BorderSide(color: AppColors.primaryColor.withOpacity(0.6)),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -68,13 +68,13 @@ class DefaultFieldForm extends StatelessWidget {
         // borderRadius: BorderRadius.circular(30
         prefixIcon: Icon(
           prefix,
-          color:AppColors.scaffoldBackGroundColor.withOpacity(0.5)
+          color:AppColors.whiteColor.withOpacity(0.5)
         ),
         suffixIcon: suffix != null
             ? IconButton(
           icon: Icon(suffix),
           onPressed: suffixPress,
-          color:AppColors.scaffoldBackGroundColor
+          color:AppColors.whiteColor
         )
             : null,
       ),

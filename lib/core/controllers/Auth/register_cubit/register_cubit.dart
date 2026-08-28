@@ -4,11 +4,9 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:volt/core/controllers/register_cubit/register_states.dart';
-import 'package:volt/core/mangers/toast.dart';
-import 'package:volt/core/network/remote/api_constants.dart';
-import 'package:volt/core/network/remote/store/dio_helper.dart';
 import 'package:volt/users/models/user_model.dart';
+import 'package:volt/core/barrel/barrel_core.dart';
+import 'package:volt/core/barrel/barrel_network.dart';
 
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(RegisterInitState());

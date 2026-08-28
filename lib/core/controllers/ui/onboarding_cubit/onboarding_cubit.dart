@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:volt/core/barrel_core.dart';
-import 'package:volt/core/network/barrel_network.dart';
+import 'package:volt/core/barrel/barrel_core.dart';
+import 'package:volt/core/barrel/barrel_network.dart';
 import 'package:volt/core/screens/login_screen.dart';
 
 class OnboardingCubit extends Cubit<OnBoardingStates> {

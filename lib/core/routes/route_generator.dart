@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:volt/core/routes/app_routes.dart' show AppRoutes;
-import 'package:volt/core/screens/login_screen.dart';
-import 'package:volt/users/Screens/register_screen.dart';
-import 'package:volt/core/screens/splash.dart';
+import 'package:volt/core/routes/app_routes.dart';
 import 'package:volt/main.dart';
-import 'package:volt/users/Screens/forget_password.dart';
-import 'package:volt/users/Screens/onBoarding.dart';
+import 'package:volt/core/barrel/barrel_routes.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {

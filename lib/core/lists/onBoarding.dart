@@ -1,4 +1,4 @@
-import 'package:volt/core/barrel_core.dart';
+import 'package:volt/core/barrel/barrel_core.dart';
 import 'package:volt/users/models/onBoarding_model.dart';
 
 final List<List<String>> onBoardingImages = [
