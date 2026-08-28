@@ -16,25 +16,28 @@ class LoginCubit extends Cubit<LoginState> {
 
   void loginUser({required String email, required String password}) {
     emit(LoadingLogin());
-    DioHelperStore.postData(url: ApiConstants.loginApi, data: {
-      "email": email,
-      "password": password
-    }).then((value) {
-      loginModel = UserModel.fromJson(value.data);
-      if (loginModel!.message != 'User logged in successfully') {
-        showToast(loginModel!.message!, ToastStates.ERROR);
-      }
-      emit(LoginSuccessState(loginModel!));
-    }).catchError((error) {
-      print(error);
-      emit(LoginFailedState(error.toString()));
-    });
+    DioHelperStore.postData(
+          url: ApiConstants.loginApi,
+          data: {"email": email, "password": password},
+        )
+        .then((value) {
+          loginModel = UserModel.fromJson(value.data);
+          if (loginModel!.message != 'User logged in successfully') {
+            showToast(loginModel!.message!, ToastStates.ERROR);
+          }
+          emit(LoginSuccessState(loginModel!));
+        })
+        .catchError((error) {
+          print(error);
+          emit(LoginFailedState(error.toString()));
+        });
   }
 
   void changePasswordIcon() {
     passwordShow = !passwordShow;
-    suffixIcon =
-    passwordShow ? Icons.visibility : Icons.visibility_off_outlined;
+    suffixIcon = passwordShow
+        ? Icons.visibility
+        : Icons.visibility_off_outlined;
     emit(ChangePasswordVisState());
   }
 }

@@ -1,4 +1,5 @@
 import 'package:volt/users/models/user_model.dart';
+
 abstract class LoginState {}
 
 class LoadingLogin extends LoginState {}
@@ -16,5 +17,7 @@ class LoginFailedState extends LoginState {
 }
 
 class ChangePasswordVisState extends LoginState {}
-class ChangePassword extends LoginState{}
-class ErrorChange extends LoginState{}
+
+class ChangePassword extends LoginState {}
+
+class ErrorChange extends LoginState {}

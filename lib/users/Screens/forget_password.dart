@@ -23,8 +23,8 @@ class ForgetPasswordScreen extends StatelessWidget {
             height: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(AppImages.loginAndRegisterBackground,),
-                  fit: BoxFit.cover
+                image: AssetImage(AppImages.loginAndRegisterBackground),
+                fit: BoxFit.cover,
               ),
             ),
             child: SingleChildScrollView(
@@ -39,39 +39,54 @@ class ForgetPasswordScreen extends StatelessWidget {
                         child: Container(
                           width: 200,
                           height: 200,
-                          child: Image(image: AssetImage(AppImages.splash,),
-                            fit: BoxFit.cover,),
+                          child: Image(
+                            image: AssetImage(AppImages.splash),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Center(
-                        child: Text('volt'.toUpperCase(),
-                          style: TextStyle(color: AppColors.scaffoldBackGroundColor,
+                        child: Text(
+                          'volt'.toUpperCase(),
+                          style: TextStyle(
+                            color: AppColors.scaffoldBackGroundColor,
                             fontFamily: 'Montserrat',
-                            fontSize: AppFontsSize.fontSize50,),),
+                            fontSize: AppFontsSize.fontSize50,
+                          ),
+                        ),
                       ),
                       Center(
-                        child: Text('Power of World'.toUpperCase(),
-                          style: TextStyle(color: Colors.indigo,
+                        child: Text(
+                          'Power of World'.toUpperCase(),
+                          style: TextStyle(
+                            color: Colors.indigo,
                             fontFamily: 'Jannah',
-                            fontSize: AppFontsSize.fontSize20,),),
+                            fontSize: AppFontsSize.fontSize20,
+                          ),
+                        ),
                       ),
                       Row(
                         children: [
-                          Text('Forget Password',
+                          Text(
+                            'Forget Password',
                             style: TextStyle(
                               color: AppColors.scaffoldBackGroundColor,
                               fontFamily: 'Montserrat',
-                              fontSize: AppFontsSize.fontSize20,),),
-                          Image(image: AssetImage(AppImages.splash), width: 30)
+                              fontSize: AppFontsSize.fontSize20,
+                            ),
+                          ),
+                          Image(image: AssetImage(AppImages.splash), width: 30),
                         ],
                       ),
-                      Text('Please enter your data to continue',
-                        style: TextStyle(color: Colors.grey,
+                      Text(
+                        'Please enter your data to continue',
+                        style: TextStyle(
+                          color: Colors.grey,
                           fontFamily: 'Montserrat',
-                          fontSize: AppFontsSize.fontSize15,),),
-                      SizedBox(
-                        height: AppValuesForWAndH.height2,
+                          fontSize: AppFontsSize.fontSize15,
+                        ),
                       ),
+                      SizedBox(height: AppValuesForWAndH.height2),
                       DefaultFieldForm(
                         controller: nationalIDController,
                         keyboard: TextInputType.visiblePassword,
@@ -85,12 +100,11 @@ class ForgetPasswordScreen extends StatelessWidget {
                         },
                         labelStyle: TextStyle(
                           color: AppColors.scaffoldBackGroundColor,
-                          fontWeight: FontWeight.w100,),
+                          fontWeight: FontWeight.w100,
+                        ),
                         prefix: IconBroken.Ticket,
                       ),
-                      SizedBox(
-                        height: AppValuesForWAndH.height2,
-                      ),
+                      SizedBox(height: AppValuesForWAndH.height2),
                       DefaultFieldForm(
                         controller: newPasswordController,
                         keyboard: TextInputType.visiblePassword,
@@ -104,33 +118,39 @@ class ForgetPasswordScreen extends StatelessWidget {
                         },
                         labelStyle: TextStyle(
                           color: AppColors.scaffoldBackGroundColor,
-                          fontWeight: FontWeight.w100,),
+                          fontWeight: FontWeight.w100,
+                        ),
                         prefix: IconBroken.Lock,
                       ),
-                      const SizedBox(
-                        height: 50,
-                      ),
+                      const SizedBox(height: 50),
                       DefaultButton(
-                          backgroundColor: Colors.indigo.withOpacity(0.5),
-                          borderColor: Colors.transparent,
-                          buttonWidget: Text(
-                            'Reset',
-                            style: TextStyle(
-                              color:AppColors.scaffoldBackGroundColor
-                            ),
+                        backgroundColor: Colors.indigo.withOpacity(0.5),
+                        borderColor: Colors.transparent,
+                        buttonWidget: Text(
+                          'Reset',
+                          style: TextStyle(
+                            color: AppColors.scaffoldBackGroundColor,
                           ),
-                          function: () {
-                            if (formKey.currentState!.validate()) {
-                              if(Exp.isNationalValid(nationalIDController.text)) {
-                                cubit.resetPassword(nationalIDController.text,newPasswordController.text);
-                                Navigator.pushNamed(context,AppRoutes.login);
-                              }
-                              else {
-                                showToast('Please Enter Valid National ID',
-                                    ToastStates.WARNING);
-                              }
+                        ),
+                        function: () {
+                          if (formKey.currentState!.validate()) {
+                            if (Exp.isNationalValid(
+                              nationalIDController.text,
+                            )) {
+                              cubit.resetPassword(
+                                nationalIDController.text,
+                                newPasswordController.text,
+                              );
+                              Navigator.pushNamed(context, AppRoutes.login);
+                            } else {
+                              showToast(
+                                'Please Enter Valid National ID',
+                                ToastStates.WARNING,
+                              );
                             }
-                          })
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),

@@ -32,7 +32,10 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: AppColors.defaultColor,
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage(AppImages.loginAndRegisterBackground,),fit: BoxFit.cover),
+          image: DecorationImage(
+            image: AssetImage(AppImages.loginAndRegisterBackground),
+            fit: BoxFit.cover,
+          ),
         ),
         height: double.infinity,
         width: double.infinity,
@@ -43,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: 500,
               width: 500,
-              child: Image(image: AssetImage(AppImages.splash,)),
+              child: Image(image: AssetImage(AppImages.splash)),
             ),
           ],
         ),

@@ -3,5 +3,6 @@ import 'package:hexcolor/hexcolor.dart';
 
 class AppColors {
   static const Color scaffoldBackGroundColor = Colors.white;
+  static const Color primaryColor = Colors.indigo;
   static Color defaultColor = HexColor('#090C36');
 }

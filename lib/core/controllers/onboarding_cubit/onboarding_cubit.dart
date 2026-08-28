@@ -28,8 +28,11 @@ class OnboardingCubit extends Cubit<OnBoardingStates> {
   void submit(context) {
     CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
       if (value) {
-        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => LoginScreen()),
-              (Route<dynamic> route) => false,);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+          (Route<dynamic> route) => false,
+        );
       }
     });
   }
