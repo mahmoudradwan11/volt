@@ -18,14 +18,20 @@ class AppFontsSize {
 
 class AppValuesForWAndH {
   static const double width6 = 60;
+  static const double height1 = 10;
+  static const double height2 = 20;
+  static const double height3 = 30;
+  static const double height4 = 40;
+
 }
 
 String? nextScreen;
 bool? board;
-/*
-var token;
 var nationalId;
+var token;
 var adminId = '12345678910123';
+
+/*
 var companyImage;
 var bestSellerImage;
 

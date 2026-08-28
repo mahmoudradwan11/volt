@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:volt/core/themes/light/light.dart';
 import 'core/barrel_core.dart';
+import 'core/controllers/login_cubit/login_cubit.dart';
+import 'core/controllers/observer.dart';
 import 'core/network/barrel_network.dart';
 
 void main() async {
@@ -9,15 +12,16 @@ void main() async {
   await CacheHelper.init();
   await DioHelperStore.init();
   await DioHelperPayment.initDio();
+  Bloc.observer = MyBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
     ),
   );
   board = CacheHelper.getData(key: 'onBoarding');
   if (board != null) {
-    nextScreen = AppRoutes.home;
+    nextScreen = AppRoutes.login;
   } else {
     nextScreen = AppRoutes.onBoarding;
   }
@@ -31,15 +35,17 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => OnboardingCubit(), lazy: true),
+        BlocProvider(
+          create: (context) => LoginCubit(),
+          lazy: true,
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.splash,
         onGenerateRoute: RouteGenerator.generateRoutes,
         title: AppStrings.appTitle,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        ),
+        theme: lightTheme,
       ),
     );
   }

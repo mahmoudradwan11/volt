@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:volt/core/routes/app_routes.dart' show AppRoutes;
+import 'package:volt/core/screens/login_screen.dart';
+import 'package:volt/core/screens/register_screen.dart';
 import 'package:volt/core/screens/splash.dart';
 import 'package:volt/main.dart';
 import 'package:volt/users/Screens/onBoarding.dart';
@@ -15,6 +17,10 @@ class RouteGenerator {
         );
       case AppRoutes.onBoarding:
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
+      case AppRoutes.login:
+        return MaterialPageRoute(builder: (_) => LoginScreen());
+      case AppRoutes.register:
+        return MaterialPageRoute(builder: (_) => RegisterScreen());
       default:
         return unDefinedRoute();
     }

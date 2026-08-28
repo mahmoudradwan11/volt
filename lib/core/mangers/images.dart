@@ -5,4 +5,6 @@ class AppImages {
   static const String laptopOnBoarding = '$imagesPath/laptop_cate.png';
   static const String phoneOnBoarding = '$imagesPath/phone_cate.png';
   static const String smartWatchOnBoarding = '$imagesPath/smart_watch_cate.png';
+  static const String loginAndRegisterBackground ='$imagesPath/login.png';
+  static const String loginAndRig ='$imagesPath/login_image.png';
 }

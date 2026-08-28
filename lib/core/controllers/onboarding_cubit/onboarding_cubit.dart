@@ -27,7 +27,7 @@ class OnboardingCubit extends Cubit<OnBoardingStates> {
   void submit(context) {
     CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
       if (value) {
-        Navigator.pushNamed(context, AppRoutes.home);
+        Navigator.pushNamed(context, AppRoutes.login);
       }
     });
   }

@@ -92,6 +92,9 @@ flutter:
     - family: IconBroken
       fonts:
         - asset: assests/fonts/icons.ttf
+    - family: Montserrat
+      fonts:
+        - asset: assests/fonts/Montserrat-Bold.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

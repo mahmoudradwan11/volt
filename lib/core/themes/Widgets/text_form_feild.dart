@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-/*
+import 'package:volt/core/mangers/colors.dart';
 class DefaultFieldForm extends StatelessWidget {
   TextEditingController controller;
   TextInputType keyboard;
@@ -37,13 +37,13 @@ class DefaultFieldForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style:TextStyle(color:ElktraCubit.get(context).dark?AppColorsDarkTheme.whiteColor:AppColorsLightTheme.defaultColor),
+      style:TextStyle(color: AppColors.scaffoldBackGroundColor),
       onTapOutside: (event)=>FocusScope.of(context).unfocus(),
       validator: valid,
       controller: controller,
       decoration: InputDecoration(
         filled: true,
-        fillColor:ElktraCubit.get(context).dark?AppColorsDarkTheme.defaultColor.withOpacity(0.3):AppColorsLightTheme.defaultColor.withOpacity(0.2),
+        fillColor:AppColors.defaultColor.withOpacity(0.5),
         hintText: hint,
         hintStyle: hintStyle,
         labelText: label,
@@ -51,7 +51,7 @@ class DefaultFieldForm extends StatelessWidget {
         contentPadding: const EdgeInsets.all(16),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color:Colors.grey[500]!),
+          borderSide: BorderSide(color: Colors.indigo.withOpacity(0.6)),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -63,18 +63,18 @@ class DefaultFieldForm extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide:BorderSide(color:ElktraCubit.get(context).dark?AppColorsDarkTheme.defaultColor:AppColorsLightTheme.defaultColor),
+          borderSide:BorderSide(color:AppColors.defaultColor),
         ),
         // borderRadius: BorderRadius.circular(30
         prefixIcon: Icon(
           prefix,
-          color:ElktraCubit.get(context).dark?AppColorsDarkTheme.whiteColor:AppColorsLightTheme.defaultColor,
+          color:AppColors.scaffoldBackGroundColor.withOpacity(0.5)
         ),
         suffixIcon: suffix != null
             ? IconButton(
           icon: Icon(suffix),
           onPressed: suffixPress,
-          color:ElktraCubit.get(context).dark?AppColorsDarkTheme.whiteColor:AppColorsLightTheme.defaultColor
+          color:AppColors.scaffoldBackGroundColor
         )
             : null,
       ),
@@ -86,4 +86,3 @@ class DefaultFieldForm extends StatelessWidget {
     );
   }
 }
-*/

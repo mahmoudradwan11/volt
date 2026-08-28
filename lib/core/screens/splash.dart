@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:volt/core/barrel_core.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -29,7 +30,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.defaultColor,
-      body: SizedBox(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage(AppImages.loginAndRegisterBackground,),fit: BoxFit.cover),
+        ),
         height: double.infinity,
         width: double.infinity,
         child: Column(
@@ -37,9 +41,9 @@ class _SplashScreenState extends State<SplashScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 200,
-              width: 200,
-              child: Image(image: AssetImage(AppImages.splash)),
+              height: 500,
+              width: 500,
+              child: Image(image: AssetImage(AppImages.splash,)),
             ),
           ],
         ),
