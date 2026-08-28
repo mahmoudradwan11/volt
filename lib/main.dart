@@ -37,17 +37,12 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.splash,
-        onGenerateRoute: RouteGenerator.generateRoutes,
-        title: AppStrings.appTitle,
-        theme: lightTheme,
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.splash,
+      onGenerateRoute: RouteGenerator.generateRoutes,
+      title: AppStrings.appTitle,
+      theme: lightTheme,
     );
   }
 }
