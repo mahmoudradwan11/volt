@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:volt/core/routes/app_routes.dart';
 import 'package:volt/main.dart';
 import 'package:volt/core/barrel/barrel_routes.dart';
+import 'package:volt/users/Screens/home.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -10,8 +11,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case AppRoutes.home:
         return MaterialPageRoute(
-          builder: (_) => MyHomePage(title: 'Go With Flow'),
-        );
+          builder: (_) => UserHomeScreen());
       case AppRoutes.onBoarding:
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
       case AppRoutes.login:

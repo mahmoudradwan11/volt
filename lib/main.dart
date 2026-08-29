@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:volt/core/controllers/ui/home/user_home_cubit/user_home_cubit.dart';
 import 'package:volt/core/themes/light/light.dart';
 import 'core/barrel/barrel_core.dart';
 import 'core/controllers/observer.dart';
@@ -37,12 +38,19 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splash,
-      onGenerateRoute: RouteGenerator.generateRoutes,
-      title: AppStrings.appTitle,
-      theme: lightTheme,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create:(context)=>UserHomeCubit(),
+        lazy: true,
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppRoutes.splash,
+        onGenerateRoute: RouteGenerator.generateRoutes,
+        title: AppStrings.appTitle,
+        theme: lightTheme,
+      ),
     );
   }
 }

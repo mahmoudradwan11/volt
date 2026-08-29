@@ -5,6 +5,7 @@ import 'package:volt/core/barrel/barrel_core.dart';
 import 'package:volt/core/mangers/reg/reg_exp.dart';
 import 'package:volt/core/barrel/barrel_network.dart';
 import 'package:volt/main.dart';
+import 'package:volt/users/Screens/home.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -41,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MyHomePage(title: 'Go With Flows'),
+                      builder: (context) => UserHomeScreen()
                     ),
                     (Route<dynamic> route) => false,
                   );

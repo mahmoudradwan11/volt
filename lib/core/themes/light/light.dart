@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:volt/core/mangers/colors.dart';
 ThemeData lightTheme = ThemeData(
   primarySwatch: Colors.indigo,
-  appBarTheme: const AppBarTheme(
+  appBarTheme:  AppBarTheme(
     titleSpacing: 20.0,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.scaffoldBackColor,
     elevation: 0.0,
     titleTextStyle: TextStyle(
-      color: Colors.black,
+      color: AppColors.whiteColor,
       fontSize: 20.0,
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w500,
     ),
     iconTheme: IconThemeData(
@@ -37,5 +38,6 @@ ThemeData lightTheme = ThemeData(
       height: 1.3,
     ),
   ),
-  scaffoldBackgroundColor: AppColors.whiteColor,
+  scaffoldBackgroundColor: AppColors.scaffoldBackColor,
+
 );
