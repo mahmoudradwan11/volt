@@ -34,7 +34,7 @@ class UserHomeScreen extends StatelessWidget {
                     tabBackgroundColor: AppColors.whiteColor,
                     onTabChange:(index)
                     {
-                      cubit.changeIndex(index);
+                      cubit.changeScreenIndex(index);
                     },
                     padding:const EdgeInsets.all(10),
                     tabs:tabs
