@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
+import 'package:volt/features/onboarding/controllers/onboarding_cubit.dart';
+import 'package:volt/features/onboarding/controllers/onboarding_states.dart';
 import 'package:volt/features/onboarding/widgets/build_onboarding_widgets.dart';
 
 class OnboardingScreen extends StatelessWidget {

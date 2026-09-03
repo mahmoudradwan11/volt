@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:volt/features/onboarding/controllers/onboarding_cubit.dart';
+import 'package:volt/features/onboarding/controllers/onboarding_states.dart';
 import 'package:volt/features/onboarding/data/onBoarding_list.dart';
 import 'package:volt/core/themes/app_colors.dart';
 import 'package:volt/core/Widgets/button.dart';
-import 'package:volt/features/onboarding/controllers/onboarding_cubit/onboarding_cubit.dart';
-import 'package:volt/features/onboarding/controllers/onboarding_cubit/onboarding_states.dart';
 import 'package:volt/features/onboarding/models/onBoarding_model.dart';
 
 class TriangleImages extends StatelessWidget {

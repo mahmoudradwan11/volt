@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:volt/core/barrel/barrel_core.dart';
 import 'package:volt/core/barrel/barrel_network.dart';
 import 'package:volt/features/Auth/screens/login_screen.dart';
+import 'package:volt/features/onboarding/controllers/onboarding_states.dart';
 
 class OnboardingCubit extends Cubit<OnBoardingStates> {
   OnboardingCubit() : super(OnBoardingInitState());

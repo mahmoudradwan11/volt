@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:volt/features/home/controllers/user_home_cubit.dart';
 import 'package:volt/features/home/controllers/user_home_states.dart';
-import 'package:volt/features/home/data/home_list.dart';
 import 'package:volt/core/themes/app_colors.dart';
 import 'package:volt/core/constants/icon_broken.dart';
 import 'package:volt/core/constants/app_images.dart';
 import 'package:volt/core/constants/app_strings.dart';
+import 'package:volt/features/products/data/product_cate_list.dart';
 import 'package:volt/features/products/widgets/build_user_product_home_cate_item.dart';
 
 class ProductScreen extends StatelessWidget {

@@ -1,5 +1,3 @@
-export '../../features/onboarding/controllers/onboarding_cubit/onboarding_cubit.dart';
-export '../../features/onboarding/controllers/onboarding_cubit/onboarding_states.dart';
 export '../../features/Auth/controllers/forget_password_cubit/forget_password_cubit.dart';
 export '../../features/Auth/controllers/forget_password_cubit/forget_password_states.dart';
 export '../constants/app_strings.dart';

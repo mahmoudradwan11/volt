@@ -19,18 +19,6 @@ void main() async {
       statusBarIconBrightness: Brightness.light,
     ),
   );
-  board = CacheHelper.getData(key: 'onBoarding');
-  token = CacheHelper.getData(key: 'token');
-  nationalId = CacheHelper.getData(key: 'userId');
-  if (board != null) {
-    if (token != null) {
-      nextScreen = AppRoutes.home;
-    } else {
-      nextScreen = AppRoutes.login;
-    }
-  } else {
-    nextScreen = AppRoutes.onBoarding;
-  }
   runApp(const MyApp());
 }
 
