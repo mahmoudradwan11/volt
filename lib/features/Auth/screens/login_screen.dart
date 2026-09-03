@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:volt/core/Widgets/text_form_feild.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
-import 'package:volt/core/mangers/reg/reg_exp.dart';
+import 'package:volt/core/utils/reg_exp.dart';
 import 'package:volt/core/barrel/barrel_network.dart';
 import 'package:volt/features/Auth/controllers/login_cubit/login_cubit.dart';
 import 'package:volt/features/Auth/controllers/login_cubit/login_states.dart';
-import 'package:volt/users/Screens/home.dart';
+import 'package:volt/features/home/screens/home.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});

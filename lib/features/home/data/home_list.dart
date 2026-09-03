@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:volt/users/Screens/Product.dart';
+import 'package:volt/features/products/screens/Product.dart';
 import 'package:volt/users/Screens/cateogry.dart';
 import 'package:volt/users/Screens/orders.dart';
 import 'package:volt/users/Screens/profile.dart';
 import 'package:volt/users/Screens/wishlist.dart';
-import 'package:volt/users/models/user_home_cate_model.dart';
+import 'package:volt/features/products/models/user_home_cate_model.dart';
 
 List<GButton> tabs =const [
   GButton(icon:Icons.home_rounded,text: 'Home',),

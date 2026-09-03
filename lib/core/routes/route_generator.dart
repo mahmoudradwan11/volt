@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:volt/core/routes/app_routes.dart';
 import 'package:volt/main.dart';
 import 'package:volt/core/barrel/barrel_routes.dart';
-import 'package:volt/users/Screens/home.dart';
+import 'package:volt/features/home/screens/home.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {

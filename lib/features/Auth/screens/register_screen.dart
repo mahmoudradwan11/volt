@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:volt/core/Widgets/text_form_feild.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
-import 'package:volt/core/mangers/reg/reg_exp.dart';
+import 'package:volt/core/utils/reg_exp.dart';
 import 'package:volt/core/network/local/cache_helper.dart';
 import 'package:volt/features/Auth/controllers/register_cubit/register_cubit.dart';
 import 'package:volt/features/Auth/controllers/register_cubit/register_states.dart';
-import 'package:volt/main.dart';
-import 'package:volt/users/Screens/home.dart';
+import 'package:volt/features/home/screens/home.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});

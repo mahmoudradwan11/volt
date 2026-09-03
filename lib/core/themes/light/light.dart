@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:volt/core/mangers/colors.dart';
+import 'package:volt/core/themes/app_colors.dart';
 ThemeData lightTheme = ThemeData(
   primarySwatch: Colors.indigo,
   appBarTheme:  AppBarTheme(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:volt/core/controllers/ui/home/user_home_cubit/user_home_cubit.dart';
+import 'package:volt/features/home/controllers/user_home_cubit.dart';
 import 'package:volt/core/themes/light/light.dart';
 import 'core/barrel/barrel_core.dart';
-import 'core/controllers/observer.dart';
+import 'core/utils/observer.dart';
 import 'core/barrel/barrel_network.dart';
 
 void main() async {

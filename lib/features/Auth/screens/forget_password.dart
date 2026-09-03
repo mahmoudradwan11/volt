@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:volt/core/Widgets/text_form_feild.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
-import 'package:volt/core/mangers/reg/reg_exp.dart';
+import 'package:volt/core/utils/reg_exp.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   ForgetPasswordScreen({super.key});

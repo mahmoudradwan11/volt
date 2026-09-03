@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:volt/core/controllers/ui/home/user_home_cubit/user_home_cubit.dart';
-import 'package:volt/users/models/user_home_cate_model.dart';
+import 'package:volt/features/home/controllers/user_home_cubit.dart';
+import 'package:volt/features/products/models/user_home_cate_model.dart';
 
 Widget buildCateItem(UserHomeCateModel categoryModel,index,context)=>Padding(
   padding: const EdgeInsets.all(8.0),

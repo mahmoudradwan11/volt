@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:volt/core/controllers/ui/home/user_home_cubit/user_home_states.dart';
-import 'package:volt/core/lists/home.dart';
+import 'package:volt/features/home/controllers/user_home_states.dart';
+import 'package:volt/features/home/data/home_list.dart';
 
 class UserHomeCubit extends Cubit<UserHomeStates> {
   UserHomeCubit() : super(InitialState());

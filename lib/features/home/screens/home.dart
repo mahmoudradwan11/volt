@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:volt/core/controllers/ui/home/user_home_cubit/user_home_cubit.dart';
-import 'package:volt/core/controllers/ui/home/user_home_cubit/user_home_states.dart';
-import 'package:volt/core/lists/home.dart';
-import 'package:volt/core/mangers/colors.dart';
+import 'package:volt/features/home/controllers/user_home_cubit.dart';
+import 'package:volt/features/home/controllers/user_home_states.dart';
+import 'package:volt/features/home/data/home_list.dart';
+import 'package:volt/core/themes/app_colors.dart';
 
 class UserHomeScreen extends StatelessWidget {
   @override
