@@ -4,7 +4,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
 import 'package:volt/core/mangers/reg/reg_exp.dart';
 import 'package:volt/core/barrel/barrel_network.dart';
-import 'package:volt/main.dart';
+import 'package:volt/features/Auth/controllers/login_cubit/login_cubit.dart';
+import 'package:volt/features/Auth/controllers/login_cubit/login_states.dart';
 import 'package:volt/users/Screens/home.dart';
 
 class LoginScreen extends StatelessWidget {

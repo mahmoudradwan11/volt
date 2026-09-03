@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:volt/users/models/user_model.dart';
+import 'package:volt/features/Auth/controllers/login_cubit/login_states.dart';
+import 'package:volt/features/Auth/models/user_model.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
 import 'package:volt/core/barrel/barrel_network.dart';
 class LoginCubit extends Cubit<LoginState> {

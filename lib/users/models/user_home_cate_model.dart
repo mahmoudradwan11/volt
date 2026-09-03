@@ -1,6 +1,6 @@
 class UserHomeCateModel{
   String title;
-  int index;
+  int id;
   String image;
-  UserHomeCateModel(this.title,this.index,this.image);
+  UserHomeCateModel(this.title,this.id,this.image);
 }

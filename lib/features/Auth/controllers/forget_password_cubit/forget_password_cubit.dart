@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:volt/users/models/forget_password_model.dart';
+import 'package:volt/features/Auth/models/forget_password_model.dart';
 import 'package:volt/core/barrel/barrel_network.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
 class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {

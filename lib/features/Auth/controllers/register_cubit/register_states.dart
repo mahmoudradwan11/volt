@@ -1,4 +1,4 @@
-import 'package:volt/users/models/user_model.dart';
+import 'package:volt/features/Auth/models/user_model.dart';
 
 abstract class RegisterStates {}
 
