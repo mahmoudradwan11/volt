@@ -7,6 +7,7 @@ import 'package:volt/core/constants/icon_broken.dart';
 import 'package:volt/core/constants/app_images.dart';
 import 'package:volt/core/constants/app_strings.dart';
 import 'package:volt/features/products/data/product_cate_list.dart';
+import 'package:volt/features/products/widgets/build_product_item.dart';
 import 'package:volt/features/products/widgets/build_user_product_home_cate_item.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -77,6 +78,7 @@ class ProductScreen extends StatelessWidget {
                 );
               }
             ),
+            BuildProductItem(),
           ],
         ),
       ),
