@@ -1,15 +1,10 @@
 const String baseUrl = 'https://elwekala.onrender.com';
 var finalToken;
-
 class ApiConstants {
   static const loginApi = '$baseUrl/user/login';
   static const registerApi = '$baseUrl/user/register';
   static const forgetPasswordApi = '$baseUrl/user/forget-password';
-  static const homeLaptopApi = '$baseUrl/product/inCart/Laptops';
-  static const homeSmartPhoneApi = '$baseUrl/product/inCart/Smart Phones';
-  static const homeSmartWatchApi = '$baseUrl/product/inCart/Smart Watches';
-  static const homeSmartTvsApi = '$baseUrl/product/inCart/Smart TVs';
-  static const homeAccApi = '$baseUrl/product/inCart/PC and laptop accessories';
+  static const homeProductsApi = '$baseUrl/product/inCart/';
   static const profileApi = '$baseUrl/user/profile';
   static const editProfile = '$baseUrl/user/update';
   static const getUsersApi = '$baseUrl/user/display';

@@ -12,6 +12,9 @@ void main() async {
   await CacheHelper.init();
   await DioHelperStore.init();
   await DioHelperPayment.initDio();
+  nationalId = CacheHelper.getData(key: 'userId');
+  print(nationalId);
+
   Bloc.observer = MyBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(

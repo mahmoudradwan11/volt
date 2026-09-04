@@ -2,9 +2,7 @@ class HomeAccessories{
   String? status;
   String? message;
   List<Product>? product;
-
   HomeAccessories({this.status, this.message, this.product});
-
   HomeAccessories.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];

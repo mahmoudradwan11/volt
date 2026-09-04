@@ -6,6 +6,8 @@ import 'package:volt/core/themes/app_colors.dart';
 import 'package:volt/core/constants/icon_broken.dart';
 import 'package:volt/core/constants/app_images.dart';
 import 'package:volt/core/constants/app_strings.dart';
+import 'package:volt/features/products/controllers/product_cubit.dart';
+import 'package:volt/features/products/controllers/product_states.dart';
 import 'package:volt/features/products/data/product_cate_list.dart';
 import 'package:volt/features/products/widgets/build_product_item.dart';
 import 'package:volt/features/products/widgets/build_user_product_home_cate_item.dart';
@@ -15,72 +17,83 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundImage: AssetImage(AppImages.splash),
-            backgroundColor: Colors.transparent,
-          ),
-        ),
-        title: Text(AppStrings.appTitle.toUpperCase()),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundColor: AppColors.circleAvatarBackHomeColor,
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.favorite_border, color: AppColors.whiteColor),
+    return BlocProvider(
+      create: (_) => ProductCubit()..getProducts('Smart Phones'),
+      child: BlocConsumer<ProductCubit, ProductStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              leading: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(AppImages.splash),
+                  backgroundColor: Colors.transparent,
+                ),
               ),
-            ),
-          ),
-          CircleAvatar(
-            backgroundColor: AppColors.circleAvatarBackHomeColor,
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(IconBroken.Buy, color: AppColors.whiteColor),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage(AppImages.splash),
-              backgroundColor: AppColors.circleAvatarBackHomeColor,
-            ),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child:Column(
-          children: [
-            BlocConsumer<UserHomeCubit,UserHomeStates>(
-              listener: (BuildContext context, UserHomeStates state) {  },
-              builder: (BuildContext context, UserHomeStates state) {
-                return Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    height: 90,
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) =>
-                          buildCateItem(
-                              userHomeCateModel[index], index, context),
-                      separatorBuilder: (context, index) =>
-                      const SizedBox(
-                        width: 1,
+              title: Text(AppStrings.appTitle.toUpperCase()),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.circleAvatarBackHomeColor,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.favorite_border,
+                        color: AppColors.whiteColor,
                       ),
-                      itemCount: userHomeCateModel.length,
                     ),
                   ),
-                );
-              }
+                ),
+                CircleAvatar(
+                  backgroundColor: AppColors.circleAvatarBackHomeColor,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(IconBroken.Buy, color: AppColors.whiteColor),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage(AppImages.splash),
+                    backgroundColor: AppColors.circleAvatarBackHomeColor,
+                  ),
+                ),
+              ],
             ),
-            BuildProductItem(),
-          ],
-        ),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  BlocConsumer<UserHomeCubit, UserHomeStates>(
+                    listener: (BuildContext context, UserHomeStates state) {},
+                    builder: (BuildContext context, UserHomeStates state) {
+                      return Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          height: 90,
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => buildCateItem(
+                              userHomeCateModel[index],
+                              index,
+                              context,
+                            ),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(width: 1),
+                            itemCount: userHomeCateModel.length,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  BuildProductItem(),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

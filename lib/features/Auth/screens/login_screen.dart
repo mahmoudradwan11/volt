@@ -36,6 +36,7 @@ class LoginScreen extends StatelessWidget {
                 value: state.model.user!.token,
               ).then((value) {
                 token = state.model.user!.token;
+
                 showToast('${state.model.message}', ToastStates.SUCCESS);
                 if (state.model.user!.nationalId == adminId) {
                   // navigateAndFinishThisScreen(context, const AdminHomeScreen());
