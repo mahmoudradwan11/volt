@@ -39,5 +39,4 @@ ThemeData lightTheme = ThemeData(
     ),
   ),
   scaffoldBackgroundColor: AppColors.scaffoldBackColor,
-
 );

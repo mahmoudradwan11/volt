@@ -2,10 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
+import 'package:volt/features/products/models/product_model.dart';
 
 class BuildProductItem extends StatelessWidget {
-  const BuildProductItem({super.key});
-
+  BuildProductItem({super.key, required this.productModel});
+  Product productModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,14 +24,14 @@ class BuildProductItem extends StatelessWidget {
                  Expanded(
                    child: Container(
                        decoration: BoxDecoration(
-                           color: HexColor('31587a'),
+                           color: HexColor('1c435b'),
                            borderRadius: const BorderRadius.only(
                                topLeft: Radius.circular(20))),
                        child: Center(
                          child: RotatedBox(
                              quarterTurns: 1,
                              child: Text(
-                               'New',
+                               productModel.status!,
                                style:const TextStyle(color: Color(0xFFC8DE22)),
                              )),
                        ),
@@ -46,13 +47,13 @@ class BuildProductItem extends StatelessWidget {
                          decoration: BoxDecoration(
                            borderRadius: const BorderRadius.only(
                                topRight: Radius.circular(20)),
-                           color: HexColor('dad3c1')
+                           color: HexColor('f5ebdd')
                          ),
                          height: 125,
                          child: Padding(
                            padding:const EdgeInsets.only(right: 30, left: 10),
                            child: CachedNetworkImage(
-                               imageUrl: 'https://res.cloudinary.com/dzh2hde2n/image/upload/v1684434396/oznuauvcu9nc03jansbb.png',
+                               imageUrl:productModel.image!,
                                imageBuilder: (context,imageProvider)=>Image(image: imageProvider),
                                placeholder:(context,url)=>const Center(child: CircularProgressIndicator(color: Colors.black,),),
                                errorWidget: (context,url,error){
@@ -62,8 +63,23 @@ class BuildProductItem extends StatelessWidget {
                            ),
                          ),
                        ),
-                      IconButton(onPressed:(){}, icon:Icon(Icons.favorite,color: Colors.red,),)
-                     ],
+                       InkWell(
+                         onTap: (){
+                         //  productModel.inFavorite?FavoriteCubit.get(context).deleteFavorite(product.sId,context):FavoriteCubit.get(context).addToMyFavorite(product.sId,context);
+                         },
+                         child: Padding(
+                           padding: const EdgeInsets.all(10.0),
+                           child: CircleAvatar(
+                             backgroundColor: HexColor('#BFC0E4'),
+                             radius: 10,
+                             child:Icon(
+                                 Icons.favorite,
+                                 size: 15,
+                                 color:productModel.inFavorite!?Colors.red:Colors.grey
+                             ),
+                           ),
+                         ),
+                       )                     ],
                    ),
                  )
                ],
@@ -72,7 +88,7 @@ class BuildProductItem extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.defaultColor.withValues(alpha: 0.9),
+                color: HexColor('1c435b'),
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
@@ -89,7 +105,7 @@ class BuildProductItem extends StatelessWidget {
                           Expanded(
                             flex: 2,
                             child: Text(
-                              'Laptop',
+                              productModel.name!,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -98,8 +114,7 @@ class BuildProductItem extends StatelessWidget {
                                   fontWeight: FontWeight.w600),
                             ),
                           ),
-                          /*
-                          if(product.status=='New')
+                          if(productModel.status=='New')
                             Expanded(
                               child: Container(
                                   height: 30,
@@ -115,8 +130,6 @@ class BuildProductItem extends StatelessWidget {
                                             color: Colors.white, fontSize: 8),
                                       ))),
                             ),
-
-                           */
                         ],
                       ),
                     ),
@@ -125,7 +138,7 @@ class BuildProductItem extends StatelessWidget {
                     child: Padding(
                       padding:const EdgeInsets.only(left: 10.0),
                       child: Text(
-                        'Dell',
+                        productModel.company!,
                         style:const TextStyle(color: Colors.grey, fontSize: 15),
                       ),
                     ),
@@ -137,7 +150,7 @@ class BuildProductItem extends StatelessWidget {
                         Padding(
                           padding:const EdgeInsets.only(left: 10.0),
                           child: Text(
-                            '\$${100}',
+                           '\$${productModel.price}',
                             style:const TextStyle(
                                 color: Colors.grey, fontSize: 15),
                           ),

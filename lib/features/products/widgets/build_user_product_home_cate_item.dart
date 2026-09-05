@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:volt/features/home/controllers/user_home_cubit.dart';
+import 'package:volt/features/products/controllers/product_cubit.dart';
 import 'package:volt/features/products/models/user_home_cate_model.dart';
 
 Widget buildCateItem(UserHomeCateModel categoryModel,index,context)=>Padding(
@@ -8,6 +9,17 @@ Widget buildCateItem(UserHomeCateModel categoryModel,index,context)=>Padding(
   child:   InkWell(
     onTap:(){
       UserHomeCubit.get(context).changeCategoryIndex(index);
+      if(index==0) {
+        ProductCubit.get(context).getProducts('Laptops');
+      }else if(index == 1){
+        ProductCubit.get(context).getProducts('Smart Phones');
+      }else if(index == 2){
+        ProductCubit.get(context).getProducts('Smart Watches');
+      }else if(index == 3){
+        ProductCubit.get(context).getProducts('Smart TVs');
+      }else if(index == 4){
+        ProductCubit.get(context).getProducts('PC and laptop accessories');
+      }
     },
     child: Container(
       decoration: BoxDecoration(
