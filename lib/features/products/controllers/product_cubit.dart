@@ -9,7 +9,8 @@ class ProductCubit extends Cubit<ProductStates>{
   ProductCubit() : super(ProductInitialState());
   static ProductCubit get(context) => BlocProvider.of(context);
   ProductModel? productModel;
-  void getProducts(category){
+  void getProducts(String category){
+    emit(ProductLoadingState());
     DioHelperStore.getData(url:'${ApiConstants.homeProductsApi}$category', data: {
       "nationalId": nationalId,
     }).then((value) {

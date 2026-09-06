@@ -5,8 +5,8 @@ import 'package:volt/core/barrel/barrel_core.dart';
 import 'package:volt/features/products/models/product_model.dart';
 
 class BuildProductItem extends StatelessWidget {
-  BuildProductItem({super.key, required this.productModel});
-  Product productModel;
+  const BuildProductItem({super.key, required this.productModel});
+  final Product productModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +24,7 @@ class BuildProductItem extends StatelessWidget {
                  Expanded(
                    child: Container(
                        decoration: BoxDecoration(
-                           color: HexColor('1c435b'),
+                           color:  HexColor('#0E172E'),
                            borderRadius: const BorderRadius.only(
                                topLeft: Radius.circular(20))),
                        child: Center(
@@ -47,7 +47,7 @@ class BuildProductItem extends StatelessWidget {
                          decoration: BoxDecoration(
                            borderRadius: const BorderRadius.only(
                                topRight: Radius.circular(20)),
-                           color: HexColor('f5ebdd')
+                           color: HexColor('#0E172E')
                          ),
                          height: 125,
                          child: Padding(
@@ -88,7 +88,7 @@ class BuildProductItem extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: HexColor('1c435b'),
+                color:  HexColor('#0E172E'),
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
@@ -114,22 +114,6 @@ class BuildProductItem extends StatelessWidget {
                                   fontWeight: FontWeight.w600),
                             ),
                           ),
-                          if(productModel.status=='New')
-                            Expanded(
-                              child: Container(
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                      color: HexColor('#C70000'),
-                                      borderRadius:
-                                      const BorderRadius.horizontal(
-                                          left: Radius.circular(20))),
-                                  child: const Center(
-                                      child: Text(
-                                        '10% Off',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 8),
-                                      ))),
-                            ),
                         ],
                       ),
                     ),

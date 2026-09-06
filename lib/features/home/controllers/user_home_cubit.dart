@@ -20,13 +20,9 @@ class UserHomeCubit extends Cubit<UserHomeStates> {
   }
    chooseCategoryColor(index){ // 0
     if(userHomeCateModel[index].id == currentCategoryIndex){
-      return LinearGradient(
-          colors: [HexColor('#7832A3'), HexColor('##07094D')]);
+      return HexColor('#603FF8');
     } else {
-      return LinearGradient(colors: [
-        HexColor('#E6E7E8'),
-        HexColor('#E6E7E8'),
-      ]);
+      return  HexColor('#0E172E');
     }
     }
   }
