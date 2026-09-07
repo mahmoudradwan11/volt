@@ -6,8 +6,8 @@ import 'package:volt/features/products/controllers/product_cubit.dart';
 import 'package:volt/features/products/models/user_home_cate_model.dart';
 
 Widget buildCateItem(UserHomeCateModel categoryModel,index,context)=>Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   InkWell(
+  padding: const EdgeInsets.only(top: 10,bottom: 6),
+  child: InkWell(
     onTap:(){
       UserHomeCubit.get(context).changeCategoryIndex(index);
       ProductCubit.get(context).getProducts(categoryModel.apiCategory);
