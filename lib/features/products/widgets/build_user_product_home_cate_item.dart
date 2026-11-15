@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
 import 'package:volt/features/home/controllers/user_home_cubit.dart';
 import 'package:volt/features/products/controllers/product_cubit.dart';

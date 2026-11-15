@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:volt/core/Widgets/text_form_feild.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
 import 'package:volt/features/home/controllers/user_home_cubit.dart';
 import 'package:volt/features/home/controllers/user_home_states.dart';
-import 'package:volt/core/themes/app_colors.dart';
-import 'package:volt/core/constants/icon_broken.dart';
-import 'package:volt/core/constants/app_images.dart';
-import 'package:volt/core/constants/app_strings.dart';
 import 'package:volt/features/products/controllers/product_cubit.dart';
 import 'package:volt/features/products/controllers/product_states.dart';
 import 'package:volt/features/products/data/product_cate_list.dart';
@@ -184,8 +179,8 @@ class ProductScreen extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color:HexColor('#0E172E'),
-                            border: Border.all(color: HexColor('#603FF8').withValues(alpha: 0.3)),
+                            color:AppColors.p2Color,
+                            border: Border.all(color: AppColors.p3Color.withValues(alpha: 0.3)),
                             borderRadius: BorderRadius.circular(15)),
                         height: 55,
                         child: Center(
@@ -196,7 +191,7 @@ class ProductScreen extends StatelessWidget {
                                 hintText: 'Search',
                                 prefixIcon: const Icon(
                                   Icons.search_outlined,
-                                  color: Colors.white,
+                                  color: AppColors.whiteColor,
                                 )
                             ),
                             onSubmitted:(value){
@@ -235,8 +230,8 @@ class ProductScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           gradient: LinearGradient(colors:[
-                            color2,
-                            color1,
+                            AppColors.p2Color,
+                            AppColors.p3Color,
                           ])
                         ),
                         child: Padding(
@@ -258,7 +253,7 @@ class ProductScreen extends StatelessWidget {
                                       Text('1299\$',style: TextStyle(color: Colors.indigo,
                                           fontSize: AppFontsSize.fontSize20,
                                           fontWeight: FontWeight.bold),),
-                                      DefaultButton(buttonWidget: Text('View'.toUpperCase(),style: TextStyle(color: Colors.white),), function:(){},backgroundColor: color1.withValues(alpha: 0.5),width: 100,)
+                                      DefaultButton(buttonWidget: Text('View'.toUpperCase(),style: TextStyle(color: Colors.white),), function:(){},backgroundColor: AppColors.p2Color.withValues(alpha: 0.5),width: 100,)
 
                                     ],
                                   ),
