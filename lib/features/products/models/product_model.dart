@@ -116,16 +116,12 @@ class Product {
     category = json['category'];
     name = json['name'];
     price = json['price'];
-
     images = json['images'] != null ? List<String>.from(json['images']) : null;
-
     description = json['description'];
     image = json['image'];
     company = json['company'];
     countInStock = json['countInStock'];
     iV = json['__v'];
-
-    // لو الـ API رجع null هتفضل null
     inCart = json['inCart'];
     inFavorite = json['inFavorites'];
   }

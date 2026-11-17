@@ -15,7 +15,7 @@ class ProductSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (products == null || products!.isEmpty) {
+    if (products == null || products!.isEmpty ) {
       return const SizedBox.shrink();
     }
 
@@ -28,6 +28,7 @@ class ProductSection extends StatelessWidget {
             color: AppColors.whiteColor,
           ),
         ),
+
         const SizedBox(height: 10),
         SizedBox(
           height: 200,
