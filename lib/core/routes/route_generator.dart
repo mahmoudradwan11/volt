@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:volt/core/routes/app_routes.dart';
+import 'package:volt/features/products/models/product_model.dart';
+import 'package:volt/features/products/screens/product_details.dart';
 import 'package:volt/main.dart';
 import 'package:volt/core/barrel/barrel_routes.dart';
 import 'package:volt/features/home/screens/home.dart';
@@ -20,6 +22,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => RegisterScreen());
       case AppRoutes.forgetPassword:
         return MaterialPageRoute(builder: (_) => ForgetPasswordScreen());
+      case AppRoutes.productDetails:
+        final product = settings.arguments as Product;
+        return MaterialPageRoute(builder: (_)=> ProductDetails(product:product,));
       default:
         return unDefinedRoute();
     }

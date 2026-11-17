@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:volt/features/home/controllers/user_home_cubit.dart';
 import 'package:volt/core/themes/light/light.dart';
+import 'package:volt/features/products/controllers/product_cubit.dart';
 import 'core/barrel/barrel_core.dart';
 import 'core/utils/observer.dart';
 import 'core/barrel/barrel_network.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create:(context)=>UserHomeCubit(),
         lazy: true,
         ),
+        BlocProvider(create:(context)=>ProductCubit()..getProducts('Laptops'),
+          lazy: true,
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -41,52 +45,6 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouteGenerator.generateRoutes,
         title: AppStrings.appTitle,
         theme: lightTheme,
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
