@@ -9,6 +9,13 @@ import 'package:volt/features/products/models/product_model.dart';
 import 'package:volt/features/products/models/review_model.dart';
 import 'package:volt/features/products/controllers/product_cubit.dart';
 import 'package:volt/features/products/controllers/product_states.dart';
+import 'package:volt/features/cart/controllers/cart_cubit.dart';
+import 'package:volt/core/themes/app_colors.dart';
+import 'package:volt/core/barrel/barrel_network.dart';
+import 'package:volt/core/constants/app_values.dart';
+import 'package:volt/core/constants/toast.dart';
+import 'package:volt/features/profile/data/reviewer_resolver.dart';
+import 'package:volt/features/profile/screens/support_chat_screen.dart';
 
 class ProductDetails extends StatefulWidget {
   final Product product;
@@ -56,7 +63,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     final bool isUsed = product.status?.toLowerCase() == 'used';
 
     return Scaffold(
-      backgroundColor: HexColor('#0E172E').withValues(alpha: 0.8),
+      backgroundColor: AppColors.p2Color.withValues(alpha: 0.8),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -104,16 +111,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(28),
-                        gradient: const LinearGradient(
+                        gradient:  LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            Color(0xFF0B1530),
-                            Color(0xFF050A18),
+                            AppColors.defaultColor,
+                            AppColors.defaultColor,
                           ],
                         ),
                         border: Border.all(
-                          color: const Color(0xFF1B2B50),
+                          color: AppColors.borderColor,
                         ),
                       ),
                       child: Stack(
@@ -159,10 +166,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     );
                                   },
                                   errorWidget: (context, url, error) {
-                                    return const Center(
+                                    return Center(
                                       child: Icon(
                                         Icons.image_not_supported_outlined,
-                                        color: Colors.white54,
+                                        color: AppColors.subTextColor,
                                         size: 55,
                                       ),
                                     );
@@ -188,7 +195,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ),
                               child: Text(
                                 product.status?.toUpperCase() ?? '',
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 11,
                                   fontWeight: FontWeight.bold,
@@ -218,7 +225,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     decoration: BoxDecoration(
                                       color: currentImage == index
                                           ? const Color(0xFF8B55FF)
-                                          : Colors.white30,
+                                          : AppColors.subTextColor,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                   );
@@ -259,12 +266,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   duration: const Duration(milliseconds: 200),
                                   width: 65,
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF0B1530),
+                                    color: AppColors.defaultColor,
                                     borderRadius: BorderRadius.circular(12),
                                     border: Border.all(
                                       color: selected
                                           ? const Color(0xFF7040FF)
-                                          : const Color(0xFF172541),
+                                          : AppColors.borderColor,
                                       width: selected ? 2 : 1,
                                     ),
                                   ),
@@ -285,8 +292,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                     // Product Name
                     Text(
                       product.name ?? '',
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: AppColors.textColor,
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
                       ),
@@ -297,9 +304,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     // Company
                     Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.business_outlined,
-                          color: Colors.white,
+                          color: AppColors.textColor,
                           size: 20,
                         ),
                         const SizedBox(width: 7),
@@ -308,8 +315,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                             product.company ?? '',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: Colors.white70,
+                            style: TextStyle(
+                              color: AppColors.subTextColor,
                               fontSize: 15,
                             ),
                           ),
@@ -351,10 +358,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                     Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF071020),
+                        color: AppColors.p2Color,
                         borderRadius: BorderRadius.circular(18),
                         border: Border.all(
-                          color: const Color(0xFF172541),
+                          color: AppColors.borderColor,
                         ),
                       ),
                       child: Column(
@@ -403,10 +410,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                     const SizedBox(height: 22),
 
                     // Product Description
-                    const Text(
+                    Text(
                       'Product Description',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.textColor,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -417,8 +424,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                     Text(
                       product.description ??
                           'No description available for this product.',
-                      style: const TextStyle(
-                        color: Colors.white60,
+                      style: TextStyle(
+                        color: AppColors.subTextColor,
                         fontSize: 13,
                         height: 1.6,
                       ),
@@ -447,7 +454,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: () {
-                // Add to cart
+                CartCubit.get(context).addToCart(widget.product.sId!);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF7040FF),
@@ -456,11 +463,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              icon: const Icon(
+              icon: Icon(
                 Icons.shopping_cart_outlined,
                 color: Colors.white,
               ),
-              label: const Text(
+              label: Text(
                 'Add to Cart',
                 style: TextStyle(
                   color: Colors.white,
@@ -504,8 +511,8 @@ class _ProductDetailsState extends State<ProductDetails> {
             const SizedBox(width: 5),
             Text(
               average.toStringAsFixed(1),
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: AppColors.textColor,
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
@@ -516,8 +523,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 '(${reviews.length} reviews)',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white54,
+                style: TextStyle(
+                  color: AppColors.subTextColor,
                   fontSize: 12,
                 ),
               ),
@@ -540,11 +547,11 @@ class _ProductDetailsState extends State<ProductDetails> {
           children: [
             Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Text(
                     'Customer Reviews',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.textColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -569,26 +576,26 @@ class _ProductDetailsState extends State<ProductDetails> {
             const SizedBox(height: 12),
 
             if (state is ErrorGetAllReviews)
-              const Text(
+              Text(
                 'Could not load reviews.',
-                style: TextStyle(color: Colors.white54),
+                style: TextStyle(color: AppColors.subTextColor),
               )
             else if (reviews.isEmpty)
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF071020),
+                  color: AppColors.p2Color,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: const Color(0xFF172541),
+                    color: AppColors.borderColor,
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'No reviews yet. Be the first to review this product!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white54,
+                    color: AppColors.subTextColor,
                     fontSize: 13,
                   ),
                 ),
@@ -601,6 +608,31 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
+  /// Admin-only: open a direct chat with the reviewer (admin = support id,
+  /// reviewer = customer). The reviews API returns no nationalId, so the
+  /// reviewer is resolved by exact name against the user list.
+  Future<void> _openChatWithReviewer(ReviewsItems review) async {
+    final user = await ReviewerResolver.resolve(
+      name: review.user?.name,
+      profileImage: review.user?.profileImage,
+    );
+    if (!mounted) return;
+    final id = user?['nationalId']?.toString() ?? '';
+    if (user == null || id.isEmpty || id == ApiConstants.supportNationalId) {
+      showToast('Could not identify this reviewer', ToastStates.WARNING);
+      return;
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SupportChatScreen(
+          peerNationalId: id,
+          peerName: user['name']?.toString(),
+        ),
+      ),
+    );
+  }
+
   // Single Review Item
   Widget _buildReviewItem(ReviewsItems review) {
     final rating = (double.tryParse('${review.rating}') ?? 0)
@@ -609,15 +641,20 @@ class _ProductDetailsState extends State<ProductDetails> {
 
     final date = DateTime.tryParse(review.createdAt ?? '');
     final profileImage = review.user?.profileImage;
+    final myId =
+        (CacheHelper.getData(key: 'userId') ?? nationalId)?.toString();
+    final isAdmin = myId == ApiConstants.supportNationalId;
 
-    return Container(
+    return GestureDetector(
+      onTap: isAdmin ? () => _openChatWithReviewer(review) : null,
+      child: Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF071020),
+        color: AppColors.p2Color,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: const Color(0xFF172541),
+          color: AppColors.borderColor,
         ),
       ),
       child: Column(
@@ -627,15 +664,15 @@ class _ProductDetailsState extends State<ProductDetails> {
             children: [
               CircleAvatar(
                 radius: 21,
-                backgroundColor: const Color(0xFF172541),
+                backgroundColor: AppColors.borderColor,
                 backgroundImage:
                 profileImage != null && profileImage.isNotEmpty
                     ? NetworkImage(profileImage)
                     : null,
                 child: profileImage == null || profileImage.isEmpty
-                    ? const Icon(
+                    ? Icon(
                   Icons.person,
-                  color: Colors.white70,
+                  color: AppColors.subTextColor,
                 )
                     : null,
               ),
@@ -650,8 +687,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                       review.user?.name ?? 'Anonymous',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: AppColors.textColor,
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),
@@ -661,8 +698,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                       date != null
                           ? DateFormat('dd-MM-yyyy').format(date)
                           : '',
-                      style: const TextStyle(
-                        color: Colors.white54,
+                      style: TextStyle(
+                        color: AppColors.subTextColor,
                         fontSize: 11,
                       ),
                     ),
@@ -681,6 +718,17 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ),
               ),
+
+              // Admin-only affordance: tap the review to chat with them.
+              if (isAdmin)
+                Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Icon(
+                    Icons.chat_bubble_outline_rounded,
+                    color: AppColors.p3Color,
+                    size: 18,
+                  ),
+                ),
             ],
           ),
 
@@ -688,13 +736,14 @@ class _ProductDetailsState extends State<ProductDetails> {
 
           Text(
             review.comment ?? '',
-            style: const TextStyle(
-              color: Colors.white70,
+            style: TextStyle(
+              color: AppColors.subTextColor,
               fontSize: 13,
               height: 1.5,
             ),
           ),
         ],
+      ),
       ),
     );
   }
@@ -730,10 +779,10 @@ class _ProductDetailsState extends State<ProductDetails> {
         height: 42,
         width: 42,
         decoration: BoxDecoration(
-          color: const Color(0xFF0A1428),
+          color: AppColors.p2Color,
           shape: BoxShape.circle,
           border: Border.all(
-            color: const Color(0xFF1C2B48),
+            color: AppColors.borderColor,
           ),
         ),
         child: Icon(
@@ -757,7 +806,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           height: 34,
           width: 34,
           decoration: BoxDecoration(
-            color: const Color(0xFF101C35),
+            color: AppColors.defaultColor,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(
@@ -777,8 +826,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white54,
+                style: TextStyle(
+                  color: AppColors.subTextColor,
                   fontSize: 10,
                 ),
               ),
@@ -789,8 +838,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 value,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: AppColors.textColor,
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
                 ),
@@ -841,14 +890,14 @@ class _AddReviewDialogState extends State<_AddReviewDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: const Color(0xFF0E172E),
+      backgroundColor: AppColors.p2Color,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      title: const Text(
+      title: Text(
         'Add Your Review',
         style: TextStyle(
-          color: Colors.white,
+          color: AppColors.textColor,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -856,9 +905,9 @@ class _AddReviewDialogState extends State<_AddReviewDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
+            Text(
               'Rate this product',
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(color: AppColors.subTextColor),
             ),
 
             const SizedBox(height: 12),
@@ -896,14 +945,14 @@ class _AddReviewDialogState extends State<_AddReviewDialog> {
               controller: _commentController,
               maxLines: 4,
               minLines: 3,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: AppColors.textColor),
               decoration: InputDecoration(
                 hintText: 'Write your review...',
-                hintStyle: const TextStyle(
-                  color: Colors.white38,
+                hintStyle: TextStyle(
+                  color: AppColors.subTextColor,
                 ),
                 filled: true,
-                fillColor: const Color(0xFF071020),
+                fillColor: AppColors.p2Color,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -918,9 +967,9 @@ class _AddReviewDialogState extends State<_AddReviewDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const Text(
+          child: Text(
             'Cancel',
-            style: TextStyle(color: Colors.white54),
+            style: TextStyle(color: AppColors.subTextColor),
           ),
         ),
 
@@ -929,9 +978,9 @@ class _AddReviewDialogState extends State<_AddReviewDialog> {
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF7040FF),
           ),
-          child: const Text(
+          child: Text(
             'Submit',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: AppColors.textColor),
           ),
         ),
       ],

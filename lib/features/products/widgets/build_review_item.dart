@@ -4,14 +4,26 @@ import 'package:intl/intl.dart';
 import 'package:volt/features/Auth/controllers/login_cubit/login_cubit.dart';
 import 'package:volt/features/products/controllers/product_cubit.dart';
 import 'package:volt/features/products/models/review_model.dart';
+import 'package:volt/core/themes/app_colors.dart';
 
-Widget buildReviewItem(ReviewsItems reviewModel, context, id) => Container(
+Widget buildReviewItem(ReviewsItems reviewModel, context, id) {
+  // LoginCubit is only provided on the login route, so reading it from
+  // anywhere else throws ProviderNotFoundException. Guard the lookup and
+  // fall back to hiding the delete button when it is not available.
+  String? currentUserName;
+  try {
+    currentUserName = LoginCubit.get(context).loginModel?.user?.name;
+  } catch (_) {}
+  final bool isMine =
+      currentUserName != null && reviewModel.user?.name == currentUserName;
+
+  return Container(
   margin: const EdgeInsets.symmetric(vertical: 6),
   padding: const EdgeInsets.all(12),
   decoration: BoxDecoration(
-    color: const Color(0xFF071020),
+    color: AppColors.p2Color,
     borderRadius: BorderRadius.circular(16),
-    border: Border.all(color: const Color(0xFF172541)),
+    border: Border.all(color: AppColors.borderColor),
   ),
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,8 +52,8 @@ Widget buildReviewItem(ReviewsItems reviewModel, context, id) => Container(
                         reviewModel.user!.name!,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: AppColors.textColor,
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                         ),
@@ -54,8 +66,8 @@ Widget buildReviewItem(ReviewsItems reviewModel, context, id) => Container(
                       DateFormat(
                         'dd-MM-yyyy',
                       ).format(DateTime.tryParse(reviewModel.createdAt!)!),
-                      style: const TextStyle(
-                        color: Colors.white38,
+                      style: TextStyle(
+                        color: AppColors.subTextColor,
                         fontSize: 10,
                       ),
                     ),
@@ -81,8 +93,8 @@ Widget buildReviewItem(ReviewsItems reviewModel, context, id) => Container(
       // =========================
       Text(
         reviewModel.comment!,
-        style: const TextStyle(
-          color: Colors.white60,
+        style: TextStyle(
+          color: AppColors.subTextColor,
           fontSize: 12,
           height: 1.5,
         ),
@@ -91,24 +103,24 @@ Widget buildReviewItem(ReviewsItems reviewModel, context, id) => Container(
       // =========================
       // Delete
       // =========================
-      if (reviewModel.user!.name ==
-          LoginCubit.get(context).loginModel!.user!.name)
+      if (isMine)
         Align(
           alignment: AlignmentDirectional.bottomEnd,
           child: IconButton(
             onPressed: () {
               ProductCubit.get(context).deleteReview(reviewModel.sId, id);
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.delete_outline,
-              color: Colors.white54,
+              color: AppColors.subTextColor,
               size: 20,
             ),
           ),
         ),
     ],
   ),
-);
+  );
+}
 
 // =========================
 // Rating

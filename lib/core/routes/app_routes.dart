@@ -6,4 +6,5 @@ class AppRoutes {
   static const home = '/';
   static const forgetPassword = '/forgetPassword';
   static const productDetails = '/ProductDetails';
+  static const cart = '/cart';
 }

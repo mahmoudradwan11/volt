@@ -10,6 +10,7 @@ import 'package:volt/features/products/data/product_cate_list.dart';
 import 'package:volt/features/products/models/product_model.dart';
 import 'package:volt/features/products/widgets/build_user_product_home_cate_item.dart';
 import 'package:volt/features/products/widgets/product_section.dart';
+import 'package:volt/core/themes/app_colors.dart';
 
 class ProductScreen extends StatelessWidget {
   ProductScreen({super.key});
@@ -44,15 +45,15 @@ class ProductScreen extends StatelessWidget {
                         height: 42,
                         width: 42,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF0A1428),
+                          color: AppColors.p2Color,
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: const Color(0xFF1C2B48),
+                            color: AppColors.borderColor,
                           ),
                         ),
                         child: Icon(
                           Icons.favorite_border,
-                          color: AppColors.whiteColor,
+                          color: AppColors.textColor,
                           size: 19,
                         ),
                       ),
@@ -64,21 +65,23 @@ class ProductScreen extends StatelessWidget {
                   child: CircleAvatar(
                       backgroundColor: AppColors.circleAvatarBackHomeColor,
                       child:  InkWell(
-                        onTap: (){},
+                        onTap: () {
+                          Navigator.pushNamed(context, AppRoutes.cart);
+                        },
                         borderRadius: BorderRadius.circular(30),
                         child: Container(
                           height: 42,
                           width: 42,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF0A1428),
+                            color: AppColors.p2Color,
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: const Color(0xFF1C2B48),
+                              color: AppColors.borderColor,
                             ),
                           ),
                           child: Icon(
                             IconBroken.Buy,
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             size: 19,
                           ),
                         ),
@@ -96,15 +99,15 @@ class ProductScreen extends StatelessWidget {
                           height: 42,
                           width: 42,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF0A1428),
+                            color: AppColors.p2Color,
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: const Color(0xFF1C2B48),
+                              color: AppColors.borderColor,
                             ),
                           ),
                           child: Icon(
                             IconBroken.Notification,
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             size: 19,
                           ),
                         ),
@@ -134,9 +137,9 @@ class ProductScreen extends StatelessWidget {
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Search',
-                            prefixIcon: const Icon(
+                            prefixIcon: Icon(
                               Icons.search_outlined,
-                              color: AppColors.whiteColor,
+                              color: AppColors.subTextColor,
                             ),
                           ),
                           onSubmitted: (value) {
@@ -182,8 +185,7 @@ class ProductScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
                           children: [
-                            Center(
-                              child: Expanded(
+                            Expanded(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment:
@@ -192,7 +194,7 @@ class ProductScreen extends StatelessWidget {
                                     Text(
                                       'MacBook Pro M',
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: AppColors.textColor,
                                         fontSize: AppFontsSize.fontSize20,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -216,7 +218,7 @@ class ProductScreen extends StatelessWidget {
                                     DefaultButton(
                                       buttonWidget: Text(
                                         'View'.toUpperCase(),
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: AppColors.textColor),
                                       ),
                                       function: () {},
                                       backgroundColor: AppColors.p2Color
@@ -226,7 +228,6 @@ class ProductScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            ),
                             Expanded(
                               child: Container(
                                 height: 100,
@@ -245,7 +246,7 @@ class ProductScreen extends StatelessWidget {
                     SizedBox(height: 10),
                     Center(
                       child: LoadingAnimationWidget.inkDrop(
-                        color: Colors.white,
+                        color: AppColors.textColor,
                         size: 20,
                       ),
                     ),
@@ -277,15 +278,15 @@ class ProductScreen extends StatelessWidget {
                         height: 42,
                         width: 42,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF0A1428),
+                          color: AppColors.p2Color,
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: const Color(0xFF1C2B48),
+                            color: AppColors.borderColor,
                           ),
                         ),
                         child: Icon(
                           Icons.favorite_border,
-                          color: AppColors.whiteColor,
+                          color: AppColors.textColor,
                           size: 19,
                         ),
                       ),
@@ -297,21 +298,23 @@ class ProductScreen extends StatelessWidget {
                 child: CircleAvatar(
                     backgroundColor: AppColors.circleAvatarBackHomeColor,
                     child:  InkWell(
-                      onTap: (){},
+                      onTap: () {
+                          Navigator.pushNamed(context, AppRoutes.cart);
+                        },
                       borderRadius: BorderRadius.circular(30),
                       child: Container(
                         height: 42,
                         width: 42,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF0A1428),
+                          color: AppColors.p2Color,
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: const Color(0xFF1C2B48),
+                            color: AppColors.borderColor,
                           ),
                         ),
                         child: Icon(
                           IconBroken.Buy,
-                          color: AppColors.whiteColor,
+                          color: AppColors.textColor,
                           size: 19,
                         ),
                       ),
@@ -329,15 +332,15 @@ class ProductScreen extends StatelessWidget {
                         height: 42,
                         width: 42,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF0A1428),
+                          color: AppColors.p2Color,
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: const Color(0xFF1C2B48),
+                            color: AppColors.borderColor,
                           ),
                         ),
                         child: Icon(
                           IconBroken.Notification,
-                          color: AppColors.whiteColor,
+                          color: AppColors.textColor,
                           size: 19,
                         ),
                       ),
@@ -368,9 +371,9 @@ class ProductScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Search',
-                          prefixIcon: const Icon(
+                          prefixIcon: Icon(
                             Icons.search_outlined,
-                            color: AppColors.whiteColor,
+                            color: AppColors.subTextColor,
                           ),
                         ),
                         onSubmitted: (value) {
@@ -415,8 +418,7 @@ class ProductScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: Row(
                         children: [
-                          Center(
-                            child: Expanded(
+                          Expanded(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -424,7 +426,7 @@ class ProductScreen extends StatelessWidget {
                                   Text(
                                     'MacBook Pro M',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: AppColors.textColor,
                                       fontSize: AppFontsSize.fontSize20,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -448,7 +450,7 @@ class ProductScreen extends StatelessWidget {
                                   DefaultButton(
                                     buttonWidget: Text(
                                       'View'.toUpperCase(),
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: AppColors.textColor),
                                     ),
                                     function: () {},
                                     backgroundColor: AppColors.p2Color
@@ -458,7 +460,6 @@ class ProductScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ),
                           Expanded(
                             child: Container(
                               height: 100,
@@ -475,10 +476,10 @@ class ProductScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-                  if(ProductStates is ProductLoadingState)
+                  if (state is ProductLoadingState)
                     Center(
                       child: LoadingAnimationWidget.inkDrop(
-                        color: Colors.white,
+                        color: AppColors.textColor,
                         size: 20,
                       ),
                     ),

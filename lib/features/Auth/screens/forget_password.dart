@@ -49,7 +49,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                           child: Text(
                             'volt'.toUpperCase(),
                             style: TextStyle(
-                              color: AppColors.whiteColor,
+                              color: AppColors.textColor,
                               fontFamily: 'Montserrat',
                               fontSize: AppFontsSize.fontSize50,
                             ),
@@ -70,7 +70,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                             Text(
                               'Forget Password',
                               style: TextStyle(
-                                color: AppColors.whiteColor,
+                                color: AppColors.textColor,
                                 fontFamily: 'Montserrat',
                                 fontSize: AppFontsSize.fontSize20,
                               ),
@@ -99,7 +99,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                             return null;
                           },
                           labelStyle: TextStyle(
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             fontWeight: FontWeight.w100,
                           ),
                           prefix: IconBroken.Ticket,
@@ -117,7 +117,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                             return null;
                           },
                           labelStyle: TextStyle(
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             fontWeight: FontWeight.w100,
                           ),
                           prefix: IconBroken.Lock,
@@ -129,7 +129,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                           buttonWidget: Text(
                             'Reset',
                             style: TextStyle(
-                              color: AppColors.whiteColor,
+                              color: Colors.white,
                             ),
                           ),
                           function: () {

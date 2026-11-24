@@ -17,8 +17,8 @@ class ProductCubit extends Cubit<ProductStates>{
       "nationalId": nationalId,
     }).then((value) {
       productModel = ProductModel.fromJson(value.data);
-      print(productModel!.phoneNewProduct!.length);
-      print(productModel!.phoneUsedProduct!.length);
+      print(productModel!.phoneNewProduct?.length);
+      print(productModel!.phoneUsedProduct?.length);
       emit(GetProductStates());
     }).catchError((error) {
       print(error.toString());
@@ -50,7 +50,7 @@ class ProductCubit extends Cubit<ProductStates>{
         url: 'https://elwekala.onrender.com/review/allreviews/$productId')
         .then((value) {
       reviewModel = ReviewModel.fromJson(value.data);
-      print('Reviews = ${reviewModel!.reviews!.length}');
+      print('Reviews = ${reviewModel!.reviews?.length}');
       emit(GetAllReviews());
     }).catchError((error) {
       print(error.toString());

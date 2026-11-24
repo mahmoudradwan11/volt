@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:volt/features/home/controllers/user_home_states.dart';
 import 'package:volt/features/products/data/product_cate_list.dart';
+import 'package:volt/core/themes/app_colors.dart';
 
 class UserHomeCubit extends Cubit<UserHomeStates> {
   UserHomeCubit() : super(InitialState());
@@ -21,7 +22,7 @@ class UserHomeCubit extends Cubit<UserHomeStates> {
     if(userHomeCateModel[index].id == currentCategoryIndex){
       return HexColor('#603FF8');
     } else {
-      return  HexColor('#0E172E');
+      return  AppColors.p2Color;
     }
     }
   }

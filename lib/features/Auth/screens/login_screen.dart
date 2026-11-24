@@ -8,6 +8,8 @@ import 'package:volt/core/barrel/barrel_network.dart';
 import 'package:volt/features/Auth/controllers/login_cubit/login_cubit.dart';
 import 'package:volt/features/Auth/controllers/login_cubit/login_states.dart';
 import 'package:volt/features/home/screens/home.dart';
+import 'package:volt/features/home/controllers/user_home_cubit.dart';
+import 'package:volt/core/themes/app_colors.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -41,7 +43,12 @@ class LoginScreen extends StatelessWidget {
                 if (state.model.user!.nationalId == adminId) {
                   // navigateAndFinishThisScreen(context, const AdminHomeScreen());
                 } else {
-                  // ElktraCubit.get(context).currentHomeScreenIndex=0;
+                  // The root cubit survives sign-out; always land on Home.
+                  try {
+                    UserHomeCubit.get(context).currentScreenIndex = 0;
+                  } catch (e) {
+                    print(e.toString());
+                  }
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
@@ -90,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                           child: Text(
                             'volt'.toUpperCase(),
                             style: TextStyle(
-                              color: AppColors.whiteColor,
+                              color: AppColors.textColor,
                               fontFamily: 'Montserrat',
                               fontSize: AppFontsSize.fontSize50,
                             ),
@@ -111,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                             Text(
                               'Welcome back',
                               style: TextStyle(
-                                color: AppColors.whiteColor,
+                                color: AppColors.textColor,
                                 fontFamily: 'Montserrat',
                                 fontSize: AppFontsSize.fontSize20,
                               ),
@@ -144,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                             fontWeight: FontWeight.w100,
                           ),
                           labelStyle: TextStyle(
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             fontWeight: FontWeight.w100,
                           ),
                           prefix: IconBroken.Message,
@@ -166,7 +173,7 @@ class LoginScreen extends StatelessWidget {
                             fontWeight: FontWeight.w100,
                           ),
                           labelStyle: TextStyle(
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             fontWeight: FontWeight.w100,
                           ),
                           prefix: IconBroken.Lock,
@@ -195,16 +202,16 @@ class LoginScreen extends StatelessWidget {
                         state is LoadingLogin
                             ? Center(
                                 child: LoadingAnimationWidget.inkDrop(
-                                  color: Colors.white,
+                                  color: AppColors.textColor,
                                   size: 20,
                                 ),
                               )
                             : DefaultButton(
                                 backgroundColor: AppColors.defaultColor.withOpacity(0.5),
                                 borderColor: Colors.transparent,
-                                buttonWidget: const Text(
+                                buttonWidget: Text(
                                   'Login',
-                                  style: TextStyle(color:AppColors.whiteColor),
+                                  style: TextStyle(color:AppColors.textColor),
                                 ),
                                 function: () {
                                   if (formKey.currentState!.validate()) {
@@ -241,7 +248,7 @@ class LoginScreen extends StatelessWidget {
                                 child: Text(
                                   'Create Account',
                                   style: TextStyle(
-                                    color: AppColors.whiteColor,
+                                    color: AppColors.textColor,
                                   ),
                                 ),
                               ),

@@ -37,7 +37,7 @@ class DefaultFieldForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style:TextStyle(color: AppColors.whiteColor),
+      style:TextStyle(color: AppColors.textColor),
       onTapOutside: (event)=>FocusScope.of(context).unfocus(),
       validator: valid,
       controller: controller,
@@ -68,13 +68,13 @@ class DefaultFieldForm extends StatelessWidget {
         // borderRadius: BorderRadius.circular(30
         prefixIcon: Icon(
           prefix,
-          color:AppColors.whiteColor.withOpacity(0.5)
+          color:AppColors.subTextColor
         ),
         suffixIcon: suffix != null
             ? IconButton(
           icon: Icon(suffix),
           onPressed: suffixPress,
-          color:AppColors.whiteColor
+          color:AppColors.subTextColor
         )
             : null,
       ),

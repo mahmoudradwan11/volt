@@ -25,7 +25,7 @@ class ProductSection extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-            color: AppColors.whiteColor,
+            color: AppColors.textColor,
           ),
         ),
 

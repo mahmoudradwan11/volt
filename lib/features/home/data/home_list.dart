@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:volt/features/orders/screens/orders_screen.dart';
 import 'package:volt/features/products/screens/Product.dart';
-import 'package:volt/users/Screens/cateogry.dart';
-import 'package:volt/users/Screens/orders.dart';
-import 'package:volt/users/Screens/profile.dart';
-import 'package:volt/users/Screens/wishlist.dart';
+import 'package:volt/features/category/screens/category_screen.dart';
+import 'package:volt/features/profile/screens/settings_screen.dart';
+import 'package:volt/features/favorites/screens/favorites_screen.dart';
 
 List<GButton> tabs =const [
   GButton(icon:Icons.home_rounded,text: 'Home',),
@@ -16,8 +16,8 @@ List<GButton> tabs =const [
 
 List<Widget> screens = [
   ProductScreen(),
-  CategoryScreen(),
-  OrdersScreens(),
-  WishlistScreen(),
-  ProfileScreen()
+  const CategoryScreen(),
+  const OrdersScreen(),
+  const FavoritesScreen(),
+  const SettingsScreen()
 ];

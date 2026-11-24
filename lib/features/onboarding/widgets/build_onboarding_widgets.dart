@@ -110,7 +110,7 @@ class TriangleImages extends StatelessWidget {
                     function: () {
                       cubit.submit(context);
                     },
-                    backgroundColor: AppColors.defaultColor,
+                    backgroundColor: AppColors.p3Color,
                   ),
                 )
                     : Padding(
@@ -128,7 +128,7 @@ class TriangleImages extends StatelessWidget {
                         curve: Curves.fastLinearToSlowEaseIn,
                       );
                     },
-                    backgroundColor: AppColors.defaultColor,
+                    backgroundColor: AppColors.p3Color,
                   ),
                 ),
               ],

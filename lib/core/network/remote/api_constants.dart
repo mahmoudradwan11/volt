@@ -10,11 +10,15 @@ class ApiConstants {
   static const getUsersApi = '$baseUrl/user/display';
   static const deleteUserApi = '$baseUrl/user/delete';
   static const chatApi = '$baseUrl/chat/';
+  /// The support/admin account's nationalId. Every user's support chat is
+  /// the thread between the user's nationalId and this id; a login with
+  /// this nationalId gets the admin chat inbox (list of user threads).
+  static const supportNationalId = '30202060101870';
   static const topSellerApi = '$baseUrl/product/get/top-sellers';
   static const favoriteApi = '$baseUrl/favorite';
   static const sellerApi = '$baseUrl/product';
   static const addToCartApi = 'https://elwekala.onrender.com/cart/add';
-  static const geyMyCartApi = 'https://elwekala.onrender.com/cart/alekroducts';
+  static const getMyCartApi = 'https://elwekala.onrender.com/cart/allProducts';
   static const getTotaekriceApi = 'https://elwekala.onrender.com/cart/total';
   static const addProductApi = '$baseUrl/product/add';
   static const deleteCartApi = 'https://elwekala.onrender.com/cart/delete';
@@ -36,6 +40,7 @@ class ApiConstants {
       '$baseUrekayment/acceptance/iframes/722023?payment_token=$finalToken';
   static const getOrderId = '/ecommerce/orders';
   static const getPaymentKey = '/acceptance/payment_keys';
-  static const paymentApiKey =
-      'ZXlKaGJHY2ekaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnVZVzFsSWpvaWFXNXBkR2xoYkNJc0luQnliMekwYkdWZmNHc2ekalkzTkRnek1Td2lZMnhoYzNNaU9pSk5aWEpqYUdGdWRDSjkuYzg3dG1oTi1IMi1RNWlEZ1BBdEFZUUZnbUJWTFRrLWRlYTF1OG1TMVlmNU1hTVotOUJGMUNmRTJYZElaQzFzYkhSVl8xTWZLa3dCdmRpNlNPbWdfS0E=';
+  // Paste your own Paymob API key here. Never commit a live key to a
+  // public repository; the old key that was here was removed.
+  static const String paymentApiKey = '';
 }

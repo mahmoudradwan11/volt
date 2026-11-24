@@ -20,7 +20,7 @@ class UserHomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left:10,right: 10,bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Color(0xFF151721),
+                    color: AppColors.circleAvatarBackHomeColor,
                     borderRadius: BorderRadius.circular(20)
                 ),
                 child: Padding(
@@ -28,7 +28,7 @@ class UserHomeScreen extends StatelessWidget {
                   child: GNav(
                     tabBorderRadius:20,
                     gap:5,
-                    backgroundColor: Color(0xFF151721),
+                    backgroundColor: AppColors.circleAvatarBackHomeColor,
                     color: Color(0xFF8B8D9C),
                     activeColor:  Color(0xFF3F79EB),
                     tabBackgroundColor: AppColors.whiteColor,

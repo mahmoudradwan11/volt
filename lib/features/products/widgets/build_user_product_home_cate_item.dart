@@ -28,7 +28,7 @@ Widget buildCateItem(UserHomeCateModel categoryModel,index,context)=>Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Image(image:AssetImage(categoryModel.image),height: 40,width: 40,fit: BoxFit.contain,),
                   )),
-              Text(categoryModel.title,style: TextStyle(color:AppColors.whiteColor,fontSize: 10),)
+              Text(categoryModel.title,style: TextStyle(color:AppColors.textColor,fontSize: 10),)
             ],
           ),
         ),

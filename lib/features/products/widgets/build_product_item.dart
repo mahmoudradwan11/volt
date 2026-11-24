@@ -2,7 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:volt/core/barrel/barrel_core.dart';
+import 'package:volt/features/orders/controllers/orders_cubit.dart';
+import 'package:volt/features/favorites/controllers/favorite_cubit.dart';
+import 'package:volt/features/favorites/controllers/favorite_states.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:volt/features/orders/models/order_model.dart';
 import 'package:volt/features/products/models/product_model.dart';
+import 'package:volt/core/themes/app_colors.dart';
 
 class BuildProductItem extends StatelessWidget {
   const BuildProductItem({super.key, required this.productModel});
@@ -28,14 +34,14 @@ class BuildProductItem extends StatelessWidget {
                    Expanded(
                      child: Container(
                          decoration: BoxDecoration(
-                             color:  HexColor('#0E172E'),
+                             color:  AppColors.p2Color,
                              borderRadius: const BorderRadius.only(
                                  topLeft: Radius.circular(20))),
                          child: Center(
                            child: RotatedBox(
                                quarterTurns: 1,
                                child: Text(
-                                 productModel.status!,
+                                 productModel.status ?? '',
                                  style:const TextStyle(color: Color(0xFFC8DE22)),
                                )),
                          ),
@@ -51,38 +57,44 @@ class BuildProductItem extends StatelessWidget {
                            decoration: BoxDecoration(
                              borderRadius: const BorderRadius.only(
                                  topRight: Radius.circular(20)),
-                             color: HexColor('#0E172E')
+                             color: AppColors.p2Color
                            ),
                            height: 125,
                            child: Padding(
                              padding:const EdgeInsets.only(right: 30, left: 10),
                              child: CachedNetworkImage(
-                                 imageUrl:productModel.image!,
+                                 imageUrl: productModel.image ?? '',
                                  imageBuilder: (context,imageProvider)=>Image(image: imageProvider),
                                  placeholder:(context,url)=>const Center(child: CircularProgressIndicator(color: Colors.black,),),
                                  errorWidget: (context,url,error){
                                    print(error.toString());
-                                   return Center(child: CircularProgressIndicator(color: HexColor('#07094D'),),);
+                                   return Center(child: CircularProgressIndicator(color: AppColors.p3Color,),);
                                  }
                              ),
                            ),
                          ),
-                         InkWell(
-                           onTap: (){
-                           //  productModel.inFavorite?FavoriteCubit.get(context).deleteFavorite(product.sId,context):FavoriteCubit.get(context).addToMyFavorite(product.sId,context);
-                           },
-                           child: Padding(
-                             padding: const EdgeInsets.all(10.0),
-                             child: CircleAvatar(
-                               backgroundColor: HexColor('#BFC0E4'),
-                               radius: 10,
-                               child:Icon(
-                                   Icons.favorite,
-                                   size: 15,
-                                   color:productModel.inFavorite!?Colors.red:Colors.grey
+                         Builder(
+                           builder: (context) {
+                             FavoriteCubit? favoriteCubit;
+                             try {
+                               favoriteCubit = FavoriteCubit.get(context);
+                             } catch (_) {
+                               favoriteCubit = null;
+                             }
+                             if (favoriteCubit == null) {
+                               // No FavoriteCubit in the tree (e.g. a
+                               // partial merge): static heart, no toggle.
+                               return _favoriteHeart(
+                                   productModel.inFavorite ?? false, null);
+                             }
+                             return BlocBuilder<FavoriteCubit, FavoriteStates>(
+                               builder: (context, state) => _favoriteHeart(
+                                 favoriteCubit!.isFavorite(productModel),
+                                 () => favoriteCubit!
+                                     .toggleFavorite(productModel),
                                ),
-                             ),
-                           ),
+                             );
+                           },
                          )                     ],
                      ),
                    )
@@ -92,7 +104,7 @@ class BuildProductItem extends StatelessWidget {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color:  HexColor('#0E172E'),
+                  color:  AppColors.p2Color,
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20)),
@@ -109,11 +121,11 @@ class BuildProductItem extends StatelessWidget {
                             Expanded(
                               flex: 2,
                               child: Text(
-                                productModel.name!,
+                                productModel.name ?? '',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: Colors.white,
+                                style: TextStyle(
+                                  color: AppColors.textColor,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -126,7 +138,7 @@ class BuildProductItem extends StatelessWidget {
                       child: Padding(
                         padding:const EdgeInsets.only(left: 10.0),
                         child: Text(
-                          productModel.company!,
+                          productModel.company ?? '',
                           style:const TextStyle(color: Colors.grey, fontSize: 15),
                         ),
                       ),
@@ -153,8 +165,36 @@ class BuildProductItem extends StatelessWidget {
                                       bottomRight: Radius.circular(20))),
                               child: MaterialButton(
                                 onPressed: () {
-                                  showToast('Added', ToastStates.SUCCESS);
-                                  // ElWekalaCubit.get(context).addSales(product.sId);
+                                  // Places a local order for this product
+                                  // (saved per customer in sqflite) and it
+                                  // shows up right away in the Orders tab.
+                                  final price =
+                                      (productModel.price as num?)
+                                              ?.toDouble() ??
+                                          0;
+                                  OrdersCubit.get(context).addOrder(
+                                    Order(
+                                      sId: 'ORD-${DateTime.now().millisecondsSinceEpoch}',
+                                      createdAt: DateTime.now()
+                                          .toUtc()
+                                          .toIso8601String(),
+                                      status: 'Processing',
+                                      paymentMethod: 'Cash on delivery',
+                                      totalPaid: price,
+                                      items: [
+                                        OrderItem(
+                                          productId: productModel.sId,
+                                          name: productModel.name,
+                                          company: productModel.company,
+                                          image: productModel.image,
+                                          price: price,
+                                          quantity: 1,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                  showToast(
+                                      'Order placed', ToastStates.SUCCESS);
                                 },
                                 child: Text(
                                   'Buy'.toUpperCase(),
@@ -169,6 +209,26 @@ class BuildProductItem extends StatelessWidget {
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  /// The heart icon on the card: red when the product is in favorites,
+  /// grey when not. [onTap] is null when no FavoriteCubit is available.
+  Widget _favoriteHeart(bool isFavorite, VoidCallback? onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: CircleAvatar(
+          backgroundColor: AppColors.p2Color,
+          radius: 10,
+          child: Icon(
+            Icons.favorite,
+            size: 15,
+            color: isFavorite ? Colors.red : Colors.grey,
+          ),
         ),
       ),
     );

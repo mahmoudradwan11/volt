@@ -89,7 +89,7 @@ class RegisterScreen extends StatelessWidget {
                           child: Text(
                             'volt'.toUpperCase(),
                             style: TextStyle(
-                              color: AppColors.whiteColor,
+                              color: AppColors.textColor,
                               fontFamily: 'Montserrat',
                               fontSize: AppFontsSize.fontSize50,
                             ),
@@ -110,7 +110,7 @@ class RegisterScreen extends StatelessWidget {
                             Text(
                               'Create your account',
                               style: TextStyle(
-                                color: AppColors.whiteColor,
+                                color: AppColors.textColor,
                                 fontFamily: 'Montserrat',
                                 fontSize: AppFontsSize.fontSize20,
                               ),
@@ -144,7 +144,7 @@ class RegisterScreen extends StatelessWidget {
                                       child: IconButton(
                                         icon: Icon(
                                           IconBroken.Camera,
-                                          color: AppColors.whiteColor,
+                                          color: AppColors.textColor,
                                         ),
                                         onPressed: () {
                                           cubit.addImage();
@@ -175,7 +175,7 @@ class RegisterScreen extends StatelessWidget {
                             fontWeight: FontWeight.w100,
                           ),
                           labelStyle: TextStyle(
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             fontWeight: FontWeight.w100,
                           ),
                           label: 'Full Name',
@@ -198,7 +198,7 @@ class RegisterScreen extends StatelessWidget {
                             fontWeight: FontWeight.w100,
                           ),
                           labelStyle: TextStyle(
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             fontWeight: FontWeight.w100,
                           ),
                           label: 'Email Address',
@@ -213,7 +213,7 @@ class RegisterScreen extends StatelessWidget {
                             fontWeight: FontWeight.w100,
                           ),
                           labelStyle: TextStyle(
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             fontWeight: FontWeight.w100,
                           ),
                           controller: phoneController,
@@ -244,7 +244,7 @@ class RegisterScreen extends StatelessWidget {
                             fontWeight: FontWeight.w100,
                           ),
                           labelStyle: TextStyle(
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             fontWeight: FontWeight.w100,
                           ),
                           label: 'Password',
@@ -275,7 +275,7 @@ class RegisterScreen extends StatelessWidget {
                             fontWeight: FontWeight.w100,
                           ),
                           labelStyle: TextStyle(
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             fontWeight: FontWeight.w100,
                           ),
                           suffix: cubit.suffix,
@@ -290,7 +290,7 @@ class RegisterScreen extends StatelessWidget {
                             fontWeight: FontWeight.w100,
                           ),
                           labelStyle: TextStyle(
-                            color: AppColors.whiteColor,
+                            color: AppColors.textColor,
                             fontWeight: FontWeight.w100,
                           ),
                           controller: nationalController,
@@ -327,7 +327,7 @@ class RegisterScreen extends StatelessWidget {
                                     Text(
                                       'I Have read and agree to the privacy policy, terms of serice, and community guidelines.',
                                       style: TextStyle(
-                                        color: AppColors.whiteColor,
+                                        color: AppColors.textColor,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -342,16 +342,16 @@ class RegisterScreen extends StatelessWidget {
                         state is LoadingUserRegister
                             ? Center(
                               child: LoadingAnimationWidget.inkDrop(
-                                  color: AppColors.whiteColor,
+                                  color: AppColors.textColor,
                                   size: 20,
                                 ),
                             )
                             : DefaultButton(
                                 backgroundColor:AppColors.primaryColor.withOpacity(0.5),
                                 borderColor: Colors.transparent,
-                                buttonWidget: const Text(
+                                buttonWidget: Text(
                                   'Create Account',
-                                  style: TextStyle(color: AppColors.whiteColor),
+                                  style: TextStyle(color: Colors.white),
                                 ),
                                 function: () {
                                   if (formKey.currentState!.validate()) {
@@ -414,7 +414,7 @@ class RegisterScreen extends StatelessWidget {
                                 child: Text(
                                   'Sign In',
                                   style: TextStyle(
-                                    color: AppColors.whiteColor,
+                                    color: AppColors.textColor,
                                     fontSize: 15,
                                   ),
                                 ),
