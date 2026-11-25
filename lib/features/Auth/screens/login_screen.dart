@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:volt/features/admin/screens/admin_home_screen.dart';
+import 'package:volt/core/constants/app_values.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:volt/core/Widgets/text_form_feild.dart';
@@ -40,8 +42,15 @@ class LoginScreen extends StatelessWidget {
                 token = state.model.user!.token;
 
                 showToast('${state.model.message}', ToastStates.SUCCESS);
-                if (state.model.user!.nationalId == adminId) {
-                  // navigateAndFinishThisScreen(context, const AdminHomeScreen());
+                if (isAdminNationalId(state.model.user!.nationalId)) {
+                  // Admin account: opens the admin UI instead of the user app.
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AdminHomeScreen(),
+                    ),
+                    (Route<dynamic> route) => false,
+                  );
                 } else {
                   // The root cubit survives sign-out; always land on Home.
                   try {

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:volt/core/routes/app_routes.dart';
+import 'package:volt/core/constants/app_values.dart';
+import 'package:volt/core/network/local/cache_helper.dart';
+import 'package:volt/features/admin/screens/admin_home_screen.dart';
 import 'package:volt/features/products/models/product_model.dart';
 import 'package:volt/features/products/screens/product_details.dart';
 import 'package:volt/main.dart';
@@ -13,8 +16,14 @@ class RouteGenerator {
       case AppRoutes.splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case AppRoutes.home:
+        // Role split: the admin account lands on the admin UI.
+        if (isAdminNationalId(CacheHelper.getData(key: 'userId'))) {
+          return MaterialPageRoute(builder: (_) => const AdminHomeScreen());
+        }
         return MaterialPageRoute(
           builder: (_) => UserHomeScreen());
+      case AppRoutes.adminHome:
+        return MaterialPageRoute(builder: (_) => const AdminHomeScreen());
       case AppRoutes.onBoarding:
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
       case AppRoutes.login:

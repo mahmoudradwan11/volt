@@ -31,6 +31,14 @@ var nationalId;
 var token;
 var adminId = '12345678910123';
 
+/// Role split at login: a nationalId ending with this suffix is the admin
+/// account and opens the admin UI; any other account opens the user app.
+/// Change it here if the admin account ever changes.
+const String adminNationalIdSuffix = '70';
+
+bool isAdminNationalId(Object? id) =>
+    id != null && id.toString().endsWith(adminNationalIdSuffix);
+
 /*
 var companyImage;
 var bestSellerImage;

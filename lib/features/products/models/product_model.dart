@@ -94,6 +94,21 @@ class Product {
   bool? inCart;
   bool? inFavorite;
 
+  /// Total units sold (only sent by GET /product/get/sorted-products).
+  int sales = 0;
+
+  /// Admin offer. The API has no discount field, so an offer is stored as
+  /// a tag at the end of the description: `[[offer:<originalPrice>:<percent>]]`.
+  /// [price] already holds the discounted price; the tag is stripped from
+  /// [description] so users never see it.
+  dynamic originalPrice;
+  double? discountPercent;
+
+  bool get hasOffer => discountPercent != null && discountPercent! > 0;
+
+  static final RegExp offerTag =
+      RegExp(r'\s*\[\[offer:([0-9.]+):([0-9.]+)\]\]\s*$');
+
   Product({
     this.sId,
     this.status,
@@ -118,6 +133,14 @@ class Product {
     price = json['price'];
     images = json['images'] != null ? List<String>.from(json['images']) : null;
     description = json['description'];
+    final tag = description == null ? null : offerTag.firstMatch(description!);
+    if (tag != null) {
+      originalPrice = num.tryParse(tag.group(1)!);
+      discountPercent = double.tryParse(tag.group(2)!);
+      description = description!.replaceFirst(offerTag, '');
+    }
+    final salesValue = json['sales'];
+    if (salesValue is num) sales = salesValue.toInt();
     image = json['image'];
     company = json['company'];
     countInStock = json['countInStock'];

@@ -11,19 +11,22 @@ import 'package:volt/features/profile/screens/support_chat_screen.dart';
 /// nationalId is the support id (Settings shows "Support Inbox" instead
 /// of "Contact Us" for that account).
 class AdminChatListScreen extends StatelessWidget {
-  const AdminChatListScreen({super.key});
+  /// False when embedded as a tab of the admin home (no back arrow).
+  final bool showBack;
+  const AdminChatListScreen({super.key, this.showBack = true});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => AdminChatCubit()..loadThreads(),
-      child: const _AdminChatListView(),
+      child: _AdminChatListView(showBack: showBack),
     );
   }
 }
 
 class _AdminChatListView extends StatelessWidget {
-  const _AdminChatListView();
+  final bool showBack;
+  const _AdminChatListView({required this.showBack});
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +39,14 @@ class _AdminChatListView extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: AppColors.scaffoldBackColor,
             elevation: 0,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_rounded,
-                  color: AppColors.textColor, size: 20),
-              onPressed: () => Navigator.pop(context),
-            ),
+            automaticallyImplyLeading: false,
+            leading: showBack
+                ? IconButton(
+                    icon: Icon(Icons.arrow_back_ios_new_rounded,
+                        color: AppColors.textColor, size: 20),
+                    onPressed: () => Navigator.pop(context),
+                  )
+                : null,
             title: Text(
               'Support Inbox',
               style: TextStyle(
@@ -217,6 +223,7 @@ class _ThreadRow extends StatelessWidget {
             builder: (_) => SupportChatScreen(
               peerNationalId: thread.nationalId,
               peerName: thread.name ?? thread.nationalId,
+              peerImageUrl: thread.profileImage,
             ),
           ),
         ),

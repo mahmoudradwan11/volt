@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:volt/core/barrel/barrel_core.dart';
 import 'package:volt/core/themes/app_colors.dart';
 import 'package:volt/features/profile/controllers/chat_cubit.dart';
 import 'package:volt/features/profile/controllers/chat_states.dart';
 import 'package:volt/features/profile/data/chat_peers_store.dart';
+import 'package:volt/features/profile/data/support_alert.dart';
 import 'package:volt/features/profile/models/chat_message_model.dart';
 
 /// Contact Us: the customer's support chat with the app. One thread per
@@ -16,27 +18,40 @@ class SupportChatScreen extends StatelessWidget {
   final String? peerNationalId;
   final String? peerName;
 
-  const SupportChatScreen({super.key, this.peerNationalId, this.peerName});
+  /// Admin thread view: the customer's profile photo for the app bar.
+  final String? peerImageUrl;
+
+  const SupportChatScreen({
+    super.key,
+    this.peerNationalId,
+    this.peerName,
+    this.peerImageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // Admin thread view: remember this customer so the Support Inbox can
-    // list the admin's own conversations without scanning all users.
     if (peerNationalId != null) {
-      ChatPeersStore.addPeer(peerNationalId!, peerName);
+      // Admin thread view: remember this customer so the Support Inbox can
+      // list the admin's own conversations without scanning all users.
+      ChatPeersStore.addPeer(peerNationalId!, peerName, image: peerImageUrl);
+    } else {
+      // User side: opening the support chat marks new support messages
+      // read (clears the home bell badge).
+      SupportAlert.instance.markRead();
     }
     return BlocProvider(
       create: (_) =>
           ChatCubit(peerNationalId: peerNationalId)..getMessages(),
-      child: _ChatView(peerName: peerName),
+      child: _ChatView(peerName: peerName, peerImageUrl: peerImageUrl),
     );
   }
 }
 
 class _ChatView extends StatefulWidget {
   final String? peerName;
+  final String? peerImageUrl;
 
-  const _ChatView({this.peerName});
+  const _ChatView({this.peerName, this.peerImageUrl});
 
   @override
   State<_ChatView> createState() => _ChatViewState();
@@ -65,6 +80,15 @@ class _ChatViewState extends State<_ChatView> {
     });
   }
 
+  /// Header avatar: the app logo on the user side (they are talking to
+  /// the app itself), the customer's real photo on the admin side.
+  ImageProvider? get _avatarImage {
+    if (widget.peerName == null) return const AssetImage(AppImages.splash);
+    final url = widget.peerImageUrl;
+    if (url != null && url.isNotEmpty) return NetworkImage(url);
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChatCubit, ChatStates>(
@@ -88,13 +112,14 @@ class _ChatViewState extends State<_ChatView> {
                 CircleAvatar(
                   radius: 16,
                   backgroundColor: AppColors.p2Color,
-                  child: Icon(
-                    widget.peerName == null
-                        ? Icons.support_agent_rounded
-                        : Icons.person_outline_rounded,
-                    color: AppColors.subTextColor,
-                    size: 18,
-                  ),
+                  backgroundImage: _avatarImage,
+                  child: _avatarImage == null
+                      ? Icon(
+                          Icons.person_outline_rounded,
+                          color: AppColors.subTextColor,
+                          size: 18,
+                        )
+                      : null,
                 ),
                 SizedBox(width: 10),
                 Flexible(

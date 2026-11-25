@@ -69,7 +69,7 @@ class SettingsBody extends StatelessWidget {
               final myId =
                   (CacheHelper.getData(key: 'userId') ?? nationalId)
                       ?.toString();
-              final isSupport = myId == ApiConstants.supportNationalId;
+              final isSupport = isAdminNationalId(myId);
               return InkWell(
                 onTap: () => Navigator.push(
                   context,

@@ -81,7 +81,11 @@ class AdminChatCubit extends Cubit<AdminChatStates> {
       // directly by id pair - no scanning needed for his own threads.
       final peers = ChatPeersStore.getPeers();
       await Future.wait(peers.map(
-        (p) => _loadThreadForId(p.nationalId, name: p.name),
+        (p) => _loadThreadForId(
+          p.nationalId,
+          name: p.name,
+          profileImage: p.image.isEmpty ? null : p.image,
+        ),
       ));
       if (threads.isNotEmpty) {
         threads.sort((a, b) => (b.lastTime ?? DateTime(1970))

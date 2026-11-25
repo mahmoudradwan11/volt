@@ -628,6 +628,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         builder: (_) => SupportChatScreen(
           peerNationalId: id,
           peerName: user['name']?.toString(),
+          peerImageUrl: user['profileImage']?.toString(),
         ),
       ),
     );
@@ -643,7 +644,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     final profileImage = review.user?.profileImage;
     final myId =
         (CacheHelper.getData(key: 'userId') ?? nationalId)?.toString();
-    final isAdmin = myId == ApiConstants.supportNationalId;
+    final isAdmin = isAdminNationalId(myId);
 
     return GestureDetector(
       onTap: isAdmin ? () => _openChatWithReviewer(review) : null,

@@ -10,6 +10,8 @@ import 'package:volt/features/products/data/product_cate_list.dart';
 import 'package:volt/features/products/models/product_model.dart';
 import 'package:volt/features/products/widgets/build_user_product_home_cate_item.dart';
 import 'package:volt/features/products/widgets/product_section.dart';
+import 'package:volt/features/profile/data/support_alert.dart';
+import 'package:volt/features/profile/screens/notifications_screen.dart';
 import 'package:volt/core/themes/app_colors.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -18,6 +20,9 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Poll the support thread for new messages (bell badge). Idempotent;
+    // no-op for the admin.
+    SupportAlert.instance.start();
     return BlocConsumer<ProductCubit, ProductStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -93,25 +98,52 @@ class ProductScreen extends StatelessWidget {
                   child: CircleAvatar(
                       backgroundColor: AppColors.circleAvatarBackHomeColor,
                       child:  InkWell(
-                        onTap: (){},
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          height: 42,
-                          width: 42,
-                          decoration: BoxDecoration(
-                            color: AppColors.p2Color,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: AppColors.borderColor,
-                            ),
-                          ),
-                          child: Icon(
-                            IconBroken.Notification,
-                            color: AppColors.textColor,
-                            size: 19,
-                          ),
-                        ),
-                      )
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const NotificationsScreen()),
+                                    ).then((_) => SupportAlert.instance.check());
+                                },
+                                borderRadius: BorderRadius.circular(30),
+                                child: Container(
+                                  height: 42,
+                                  width: 42,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.p2Color,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: AppColors.borderColor,
+                                    ),
+                                  ),
+                                  child: ValueListenableBuilder<int>(
+                                    valueListenable: SupportAlert.instance.unread,
+                                    builder: (context, count, _) => Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Icon(
+                                          IconBroken.Notification,
+                                          color: AppColors.textColor,
+                                          size: 19,
+                                        ),
+                                        if (count > 0)
+                                          Positioned(
+                                            top: 2,
+                                            right: 2,
+                                            child: Container(
+                                              width: 8,
+                                              height: 8,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.redAccent,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              )
                   ),
                 ),
               ],
@@ -326,25 +358,52 @@ class ProductScreen extends StatelessWidget {
                 child: CircleAvatar(
                     backgroundColor: AppColors.circleAvatarBackHomeColor,
                     child:  InkWell(
-                      onTap: (){},
-                      borderRadius: BorderRadius.circular(30),
-                      child: Container(
-                        height: 42,
-                        width: 42,
-                        decoration: BoxDecoration(
-                          color: AppColors.p2Color,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.borderColor,
-                          ),
-                        ),
-                        child: Icon(
-                          IconBroken.Notification,
-                          color: AppColors.textColor,
-                          size: 19,
-                        ),
-                      ),
-                    )
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const NotificationsScreen()),
+                                  ).then((_) => SupportAlert.instance.check());
+                              },
+                              borderRadius: BorderRadius.circular(30),
+                              child: Container(
+                                height: 42,
+                                width: 42,
+                                decoration: BoxDecoration(
+                                  color: AppColors.p2Color,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: AppColors.borderColor,
+                                  ),
+                                ),
+                                child: ValueListenableBuilder<int>(
+                                  valueListenable: SupportAlert.instance.unread,
+                                  builder: (context, count, _) => Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Icon(
+                                        IconBroken.Notification,
+                                        color: AppColors.textColor,
+                                        size: 19,
+                                      ),
+                                      if (count > 0)
+                                        Positioned(
+                                          top: 2,
+                                          right: 2,
+                                          child: Container(
+                                            width: 8,
+                                            height: 8,
+                                            decoration: const BoxDecoration(
+                                              color: Colors.redAccent,
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
                 ),
               ),
 
